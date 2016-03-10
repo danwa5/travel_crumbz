@@ -25,6 +25,8 @@ gem 'mongoid'
 
 
 group :development, :test do
+  gem 'rspec-rails', '~> 3.4', '>= 3.4.2'
+  gem 'mongoid-rspec', '3.0.0'
   gem 'byebug'
 end
 
@@ -32,4 +34,3 @@ group :development do
   # Access an IRB console on exception pages or by using <%= console %> in views
   gem 'web-console', '~> 2.0'
 end
-
