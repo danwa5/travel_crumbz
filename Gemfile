@@ -24,13 +24,19 @@ gem 'mongoid'
 # gem 'sdoc', '~> 0.4.0', group: :doc
 
 
-group :development, :test do
-  gem 'rspec-rails', '~> 3.4', '>= 3.4.2'
-  gem 'mongoid-rspec', '3.0.0'
-  gem 'byebug'
-end
-
 group :development do
   # Access an IRB console on exception pages or by using <%= console %> in views
   gem 'web-console', '~> 2.0'
+end
+
+group :development, :test do
+  gem 'rspec-rails', '~> 3.4', '>= 3.4.2'
+  gem 'mongoid-rspec', '3.0.0'
+  gem 'factory_girl_rails', '~> 4.6'
+  gem 'faker'
+  gem 'byebug'
+end
+
+group :test do
+  gem 'database_cleaner'
 end
