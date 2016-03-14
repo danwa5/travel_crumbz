@@ -3,6 +3,19 @@ require 'rails_helper'
 RSpec.describe User, type: :model do
   subject { User.new(first_name: 'Coconut', middle_name: nil, last_name: 'Jones') }
 
+  it 'has a valid factory' do
+    expect(build(:user)).to be_valid
+  end
+
+  describe 'associations' do
+    it { is_expected.to have_and_belong_to_many(:trips) }
+  end
+
+  describe 'fields' do
+    it { is_expected.to have_fields(:first_name, :middle_name, :last_name, :email) }
+    it { is_expected.to be_timestamped_document }
+  end
+
   describe 'validations' do
     describe '#first_name' do
       it { is_expected.to validate_presence_of(:first_name) }
@@ -14,7 +27,7 @@ RSpec.describe User, type: :model do
     end
     describe '#email' do
       it { is_expected.to validate_presence_of(:email) }
-      it { is_expected.to validate_uniqueness_of(:email) }
+      it { is_expected.to validate_uniqueness_of(:email).case_insensitive }
       it { is_expected.to validate_format_of(:email).to_allow('testing@email.com') }
     end
   end

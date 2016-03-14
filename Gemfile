@@ -4,6 +4,7 @@ gem 'rails', '4.2.6'
 
 gem 'mongo'
 gem 'mongoid'
+gem 'geocoder', '~> 1.3', '>= 1.3.1'
 
 # Use SCSS for stylesheets
 # gem 'sass-rails', '~> 5.0'
@@ -35,6 +36,7 @@ group :development, :test do
   gem 'factory_girl_rails', '~> 4.6'
   gem 'faker'
   gem 'byebug'
+  gem 'awesome_print'
 end
 
 group :test do

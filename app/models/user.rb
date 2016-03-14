@@ -2,6 +2,8 @@ class User
   include Mongoid::Document
   include Mongoid::Timestamps
 
+  has_and_belongs_to_many :trips, class_name: 'Trip'
+
   field :first_name, type: String
   field :middle_name, type: String
   field :last_name, type: String
