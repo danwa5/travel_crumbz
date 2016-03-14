@@ -3,6 +3,7 @@ FactoryGirl.define do
     first_name { Faker::Name.first_name }
     middle_name { Faker::Name.first_name }
     last_name { Faker::Name.last_name }
+    sequence(:username) { |n| "#{first_name}#{n}".downcase }
     email { Faker::Internet.email }
 
     trait :with_trip do

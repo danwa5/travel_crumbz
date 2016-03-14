@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
-  subject { User.new(first_name: 'Coconut', middle_name: nil, last_name: 'Jones') }
+  subject { build(:user, first_name: 'Coconut', middle_name: nil, last_name: 'Jones') }
 
   it 'has a valid factory' do
     expect(build(:user)).to be_valid
@@ -12,11 +12,17 @@ RSpec.describe User, type: :model do
   end
 
   describe 'fields' do
-    it { is_expected.to have_fields(:first_name, :middle_name, :last_name, :email) }
+    it { is_expected.to have_fields(:username, :first_name, :middle_name, :last_name, :email) }
     it { is_expected.to be_timestamped_document }
   end
 
   describe 'validations' do
+    describe '#username' do
+      it { is_expected.to validate_presence_of(:username) }
+      it { is_expected.to validate_uniqueness_of(:username).case_insensitive }
+      it { is_expected.to validate_length_of(:username).within(2..20) }
+      it { is_expected.to validate_format_of(:username).to_allow('a1_-') }
+    end
     describe '#first_name' do
       it { is_expected.to validate_presence_of(:first_name) }
       it { is_expected.to validate_length_of(:first_name).with_maximum(50) }

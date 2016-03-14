@@ -4,13 +4,19 @@ class User
 
   has_and_belongs_to_many :trips, class_name: 'Trip'
 
+  field :username, type: String
   field :first_name, type: String
   field :middle_name, type: String
   field :last_name, type: String
   field :email, type: String
 
+  VALID_USERNAME_REGEX = /\A[a-z0-9_\-]{2,20}\z/
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
 
+  validates :username, presence: true,
+                       uniqueness: { case_sensitive: false },
+                       length: { within: (2..20) },
+                       format: { with: VALID_USERNAME_REGEX }
   validates :first_name, presence: true, length: { maximum: 50 }
   validates :last_name, presence: true, length: { maximum: 50 }
   validates :email, presence: true,
