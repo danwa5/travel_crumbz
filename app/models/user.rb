@@ -1,6 +1,9 @@
 class User
   include Mongoid::Document
   include Mongoid::Timestamps
+  include ActiveModel::SecurePassword
+
+  has_secure_password
 
   has_and_belongs_to_many :trips, class_name: 'Trip'
 
@@ -9,8 +12,11 @@ class User
   field :middle_name, type: String
   field :last_name, type: String
   field :email, type: String
+  field :password, type: String
+  field :password_digest, type: String
+  field :remember_token, type: String
 
-  VALID_USERNAME_REGEX = /\A[a-z0-9_\-]{2,20}\z/
+  VALID_USERNAME_REGEX = /\A[\w\-]{2,20}\z/
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
 
   validates :username, presence: true,
@@ -22,9 +28,21 @@ class User
   validates :email, presence: true,
                     uniqueness: { case_sensitive: false },
                     format: { with: VALID_EMAIL_REGEX }
+  validates :password, length: { maximum: 72 }
 
   before_save do
+    self.username = username.downcase
     self.email = email.downcase
+  end
+
+  class << self
+    def new_secure_token
+      SecureRandom.urlsafe_base64
+    end
+
+    def encrypt(token)
+      Digest::SHA1.hexdigest(token.to_s)
+    end
   end
 
   def full_name
@@ -33,5 +51,11 @@ class User
     else
       "#{first_name} #{last_name}"
     end
+  end
+
+  private
+
+  def create_remember_token
+    self.remember_token = User.encrypt(User.new_secure_token)
   end
 end

@@ -5,6 +5,7 @@ FactoryGirl.define do
     last_name { Faker::Name.last_name }
     sequence(:username) { |n| "#{first_name}#{n}".downcase }
     email { Faker::Internet.email }
+    password '111111'
 
     trait :with_trip do
       after(:build) {|user| user.trips = [create(:trip, user_ids: [user.id])]}

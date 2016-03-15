@@ -36,10 +36,16 @@ RSpec.describe User, type: :model do
       it { is_expected.to validate_uniqueness_of(:email).case_insensitive }
       it { is_expected.to validate_format_of(:email).to_allow('testing@email.com') }
     end
+    describe '#password' do
+      it { is_expected.to validate_length_of(:password).with_maximum(72) }
+    end
   end
 
   describe 'before_save callback' do
-    subject { FactoryGirl.create(:user, email: 'USER@EMAIL.COM') }
+    subject { create(:user, username: 'USER1', email: 'USER@EMAIL.COM') }
+    it 'downcases the username' do
+      expect(subject.username).to eq('user1')
+    end
     it 'downcases the entire email' do
       expect(subject.email).to eq('user@email.com')
     end
@@ -61,6 +67,33 @@ RSpec.describe User, type: :model do
       it 'returns first, middle, and last names' do
         subject.middle_name = 'T'
         expect(subject.full_name).to eq('Coconut T Jones')
+      end
+    end
+  end
+
+  describe 'class methods' do
+    describe '.new_secure_token' do
+      it 'returns a secure random string' do
+        expect(SecureRandom).to receive(:urlsafe_base64).once
+        described_class.new_secure_token
+      end
+    end
+    describe '.encrypt' do
+      it 'returns an encrypted token' do
+        token = described_class.new_secure_token
+        expect(Digest::SHA1).to receive(:hexdigest).with(token).once
+        described_class.encrypt(token)
+      end
+    end
+  end
+
+  describe 'private methods' do
+    describe '#create_remember_token' do
+      it 'sets #remember_token' do
+        expect(subject.remember_token).to be_nil
+        subject.send(:create_remember_token)
+        subject.save
+        expect(subject.remember_token).to be_present
       end
     end
   end

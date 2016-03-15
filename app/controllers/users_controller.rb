@@ -1,0 +1,33 @@
+class UsersController < ApplicationController
+  before_action :signed_in_user, only: [:index, :edit, :update, :destroy]
+  before_action :correct_user,   only: [:show, :edit, :update]
+
+  def show
+    @user = User.find(params[:id])
+  end
+
+  def new
+    @user = User.new
+  end
+  
+  def create
+    @user = User.new(user_params)
+    if @user.save
+      redirect_to user_path(@user)
+    else
+      render 'new'
+    end
+  end
+
+  private
+
+  def user_params
+    params.require(:user).permit(:first_name, :middle_name, :last_name, :username, :email,
+                                 :password, :password_confirmation)
+  end
+
+  def correct_user
+    @user = User.find_by(id: params[:id])
+    redirect_to(signup_path) unless current_user?(@user)
+  end
+end
