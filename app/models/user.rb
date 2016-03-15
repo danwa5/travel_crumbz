@@ -15,6 +15,8 @@ class User
   field :password, type: String
   field :password_digest, type: String
   field :remember_token, type: String
+  field :email_confirmed, type: Boolean, default: false
+  field :confirm_token, type: String
 
   VALID_USERNAME_REGEX = /\A[\w\-]{2,20}\z/
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
@@ -35,6 +37,8 @@ class User
     self.email = email.downcase
   end
 
+  before_create :create_remember_token, :create_confirm_token
+
   class << self
     def new_secure_token
       SecureRandom.urlsafe_base64
@@ -53,9 +57,19 @@ class User
     end
   end
 
+  def email_activate
+    self.email_confirmed = true
+    self.confirm_token = nil
+    save!(:validate => false)
+  end
+
   private
 
   def create_remember_token
     self.remember_token = User.encrypt(User.new_secure_token)
+  end
+
+  def create_confirm_token
+    self.confirm_token = User.new_secure_token if self.confirm_token.blank?
   end
 end

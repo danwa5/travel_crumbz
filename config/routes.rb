@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
-  resources :users, path: 'account'
+  resources :users, path: 'account' do
+    member do
+      get :confirm_email
+    end
+  end
 
   resources :sessions, only: [:new, :create, :destroy]
 

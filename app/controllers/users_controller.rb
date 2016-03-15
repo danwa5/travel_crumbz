@@ -13,9 +13,24 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
-      redirect_to user_path(@user)
+      UserMailer.registration_confirmation(@user).deliver_now
+      flash[:success] = 'Please confirm your email address to continue.'
+      redirect_to signin_path
     else
       render 'new'
+    end
+  end
+
+  def confirm_email
+    user = User.find_by(confirm_token: params[:id])
+    if user
+      user.email_activate
+      sign_in user
+      flash[:success] = 'Welcome to the Travel Crumbz! Your account has been confirmed.'
+      redirect_to user_path(user)
+    else
+      flash[:danger] = 'Sorry. User does not exist.'
+      redirect_to signin_path
     end
   end
 

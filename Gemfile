@@ -11,6 +11,7 @@ gem 'jquery-rails', '~> 4.1', '>= 4.1.1'
 gem 'turbolinks'
 
 gem 'bcrypt', '~> 3.1.7'
+gem 'figaro'
 gem 'geocoder', '~> 1.3', '>= 1.3.1'
 
 # Use Uglifier as compressor for JavaScript assets

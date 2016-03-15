@@ -12,7 +12,8 @@ RSpec.describe User, type: :model do
   end
 
   describe 'fields' do
-    it { is_expected.to have_fields(:username, :first_name, :middle_name, :last_name, :email) }
+    it { is_expected.to have_fields(:username, :first_name, :middle_name, :last_name, :email,
+                                    :remember_token, :email_confirmed, :confirm_token) }
     it { is_expected.to be_timestamped_document }
   end
 
@@ -41,20 +42,34 @@ RSpec.describe User, type: :model do
     end
   end
 
-  describe 'before_save callback' do
-    subject { create(:user, username: 'USER1', email: 'USER@EMAIL.COM') }
-    it 'downcases the username' do
-      expect(subject.username).to eq('user1')
+  describe 'callbacks' do
+    describe 'before_save' do
+      subject { build(:user, username: 'USER1', email: 'USER@EMAIL.COM') }
+      before { subject.save }
+      it 'downcases the username' do
+        expect(subject.username).to eq('user1')
+      end
+      it 'downcases the entire email' do
+        expect(subject.email).to eq('user@email.com')
+      end
     end
-    it 'downcases the entire email' do
-      expect(subject.email).to eq('user@email.com')
+    describe 'before_create' do
+      it 'calls #create_remember_token' do
+        expect_any_instance_of(User).to receive(:create_remember_token).once
+        create(:user)
+      end
+      it 'calls #create_confirm_token' do
+        expect_any_instance_of(User).to receive(:create_confirm_token).once
+        create(:user)
+      end
     end
   end
 
-  describe '#created_at / #updated_at' do
-    subject { FactoryGirl.create(:user) }
+  describe '#created_at / #updated_at / #email_confirmed' do
+    subject { create(:user) }
     it { expect(subject.created_at).to be_present }
     it { expect(subject.updated_at).to be_present }
+    it { expect(subject.email_confirmed).to eq(false) }
   end
 
   describe '#full_name' do
@@ -94,6 +109,14 @@ RSpec.describe User, type: :model do
         subject.send(:create_remember_token)
         subject.save
         expect(subject.remember_token).to be_present
+      end
+    end
+    describe '#create_confirm_token' do
+      it 'sets #confirm_token' do
+        expect(subject.confirm_token).to be_nil
+        subject.send(:create_confirm_token)
+        subject.save
+        expect(subject.confirm_token).to be_present
       end
     end
   end
