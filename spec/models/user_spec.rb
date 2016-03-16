@@ -65,11 +65,16 @@ RSpec.describe User, type: :model do
     end
   end
 
-  describe '#created_at / #updated_at / #email_confirmed' do
+  describe '#created_at / #updated_at' do
     subject { create(:user) }
     it { expect(subject.created_at).to be_present }
     it { expect(subject.updated_at).to be_present }
-    it { expect(subject.email_confirmed).to eq(false) }
+  end
+
+  describe '#email_confirmed' do
+    it 'defaults to false' do
+      expect(User.create.email_confirmed).to eq(false)
+    end
   end
 
   describe '#full_name' do

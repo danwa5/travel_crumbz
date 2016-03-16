@@ -65,5 +65,51 @@ RSpec.describe 'Authentication', type: :feature do
       end
     end
   end
+
+  describe 'Sign In process' do
+    let(:submit) { 'Sign In' }
+
+    before { visit signin_path }
+    it { is_expected.to have_content('Sign In') }
+    it { is_expected.to have_title('Sign In') }
+
+    context 'when submitting with invalid credentials' do
+      before { click_button submit }
+      it 'redirects user to sign-in page with warning message' do
+        expect(current_path).to eq(signin_path)
+        is_expected.to have_selector('div.alert.alert-danger', text: 'Invalid email/password combination')
+      end
+    end
+
+    context 'when submitting with valid credentials' do
+      before do
+        fill_in 'Email', with: user.email
+        fill_in 'Password', with: '111111'
+        click_button submit
+      end
+      context 'but without activating account thru email confirmation' do
+        let(:user) { create(:user, password: '111111', email_confirmed: false) }
+        it 'redirects user to sign-in page with warning message' do
+          expect(current_path).to eq(signin_path)
+          is_expected.to have_selector('div.alert.alert-danger', text: 'Please activate your account')
+        end
+      end
+      context 'after activating account' do
+        let(:user) { create(:user, password: '111111') }
+        it 'navigates to user show page' do
+          expect(current_path).to eq(user_path(user))
+          expect(Capybara.current_session.driver.request.cookies.[]('remember_token')).to be_present
+        end
+
+        describe 'Sign Out process' do
+          it 'redirects user to sign-in page and deletes the remember_token cookie' do
+            visit signout_path
+            expect(current_path).to eq(signin_path)
+            expect(Capybara.current_session.driver.request.cookies.[]('remember_token')).to be_nil
+          end
+        end
+      end
+    end
+  end
 end
  
