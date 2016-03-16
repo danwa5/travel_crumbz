@@ -22,7 +22,7 @@ RSpec.describe User, type: :model do
       it { is_expected.to validate_presence_of(:username) }
       it { is_expected.to validate_uniqueness_of(:username).case_insensitive }
       it { is_expected.to validate_length_of(:username).within(2..20) }
-      it { is_expected.to validate_format_of(:username).to_allow('a1_-') }
+      it { is_expected.to validate_format_of(:username).to_allow('Aa1') }
     end
     describe '#first_name' do
       it { is_expected.to validate_presence_of(:first_name) }
@@ -74,6 +74,12 @@ RSpec.describe User, type: :model do
   describe '#email_confirmed' do
     it 'defaults to false' do
       expect(User.create.email_confirmed).to eq(false)
+    end
+  end
+
+  describe '#to_param' do
+    it 'must be the same as the username' do
+      expect(subject.to_param).to eq(subject.username)
     end
   end
 

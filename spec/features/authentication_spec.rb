@@ -73,6 +73,14 @@ RSpec.describe 'Authentication', type: :feature do
     it { is_expected.to have_content('Sign In') }
     it { is_expected.to have_title('Sign In') }
 
+    describe 'when trying to access an account without signing in' do
+      let(:stranger) { create(:user, username: 'stranger') }
+      it 'navigates back to sign-in page' do
+        visit user_path(stranger)
+        expect(current_path).to eq(signin_path)
+      end
+    end
+
     context 'when submitting with invalid credentials' do
       before { click_button submit }
       it 'redirects user to sign-in page with warning message' do
@@ -99,6 +107,14 @@ RSpec.describe 'Authentication', type: :feature do
         it 'navigates to user show page' do
           expect(current_path).to eq(user_path(user))
           expect(Capybara.current_session.driver.request.cookies.[]('remember_token')).to be_present
+        end
+
+        describe 'trying to access someone else\'s account' do
+          let(:user2) { create(:user, username: 'user2') }
+          it 'navigates back to user show page' do
+            visit user_path(user2)
+            expect(current_path).to eq(user_path(user))
+          end
         end
 
         describe 'Sign Out process' do

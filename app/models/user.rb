@@ -18,7 +18,7 @@ class User
   field :email_confirmed, type: Boolean, default: false
   field :confirm_token, type: String
 
-  VALID_USERNAME_REGEX = /\A[\w\-]{2,20}\z/
+  VALID_USERNAME_REGEX = /\A[a-zA-Z\d]{2,20}\z/
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
 
   validates :username, presence: true,
@@ -47,6 +47,10 @@ class User
     def encrypt(token)
       Digest::SHA1.hexdigest(token.to_s)
     end
+  end
+
+  def to_param
+    username
   end
 
   def full_name
