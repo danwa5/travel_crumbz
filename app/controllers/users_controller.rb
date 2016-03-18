@@ -5,6 +5,15 @@ class UsersController < ApplicationController
   def show
     @user = User.find_by(username: params[:id])
     @trips = @user.trips
+
+    # Display locations from last trip in map
+    @locations = @trips.last.try(:locations)
+
+    @hash = Gmaps4rails.build_markers(@locations) do |location, marker|
+      marker.lat location.latitude
+      marker.lng location.longitude
+      marker.infowindow location.address
+    end
   end
 
   def new

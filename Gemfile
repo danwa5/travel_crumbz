@@ -8,11 +8,13 @@ gem 'mongoid'
 gem 'bootstrap-sass', '~> 3.3.6'
 gem 'sass-rails', '~> 5.0', '>= 5.0.4'
 gem 'jquery-rails', '~> 4.1', '>= 4.1.1'
+gem 'underscore-rails', '~> 1.8', '>= 1.8.3'
 gem 'turbolinks'
 
 gem 'bcrypt', '~> 3.1.7'
 gem 'figaro'
 gem 'geocoder', '~> 1.3', '>= 1.3.1'
+gem 'gmaps4rails', '~> 2.1', '>= 2.1.2'
 
 # Use Uglifier as compressor for JavaScript assets
 # gem 'uglifier', '>= 1.3.0'
