@@ -1,6 +1,9 @@
 require 'rails_helper'
 
 RSpec.describe Trip, type: :model do
+  let(:trip) { create(:trip, :with_user, name: 'Round the World, Part 1') }
+  subject { trip }
+
   it 'has a valid factory' do
     expect(build(:trip, :with_user)).to be_valid
   end
@@ -27,7 +30,6 @@ RSpec.describe Trip, type: :model do
   end
 
   describe '#created_at / #updated_at' do
-    subject { FactoryGirl.create(:user) }
     it { expect(subject.created_at).to be_present }
     it { expect(subject.updated_at).to be_present }
   end

@@ -15,6 +15,7 @@ gem 'bcrypt', '~> 3.1.7'
 gem 'figaro'
 gem 'geocoder', '~> 1.3', '>= 1.3.1'
 gem 'gmaps4rails', '~> 2.1', '>= 2.1.2'
+gem 'mongoid-slug', '~> 5.2'
 
 # Use Uglifier as compressor for JavaScript assets
 # gem 'uglifier', '>= 1.3.0'

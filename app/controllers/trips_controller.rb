@@ -1,4 +1,5 @@
 class TripsController < ApplicationController
+  before_action :find_trip, only: [:edit, :update]
 
   def new
     @trip = user.trips.build
@@ -15,12 +16,9 @@ class TripsController < ApplicationController
   end
 
   def edit
-    @trip = user.trips.find(params[:id])
-    @locations = @trip.locations
   end
 
   def update
-    @trip = user.trips.find(params[:id])
     if @trip.update_attributes(trip_params)
       flash[:success] = 'Trip updated!'
       redirect_to user_path(user)
@@ -37,5 +35,9 @@ class TripsController < ApplicationController
 
   def user
     @user ||= User.find_by(username: params[:user_id])
+  end
+
+  def find_trip
+    @trip = user.trips.find(params[:id])
   end
 end
