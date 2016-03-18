@@ -9,9 +9,10 @@ class Location
   embedded_in :trip
 
   field :address, type: String
-  field :street_address, type: String
+  field :street_number, type: String
+  field :route, type: String
   field :city, type: String
-  field :state, type: String
+  field :state_province, type: String
   field :country, type: String
   field :postal_code, type: String
   field :coordinates, :type => Array
