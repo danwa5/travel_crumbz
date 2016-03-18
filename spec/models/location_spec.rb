@@ -7,24 +7,29 @@ RSpec.describe Location, type: :model do
     expect(build(:location)).to be_valid
   end
 
+  describe 'associations' do
+    it { is_expected.to be_embedded_in(:trip) }
+  end
+
   describe 'fields' do
-    it { is_expected.to have_fields(:formatted_address, :street_address, :city, :state, :country, :postal_code, :latitude, :longitude) }
+    it { is_expected.to have_fields(:address, :street_address, :city, :state, :country, :postal_code) }
+    it { is_expected.to have_field(:coordinates).of_type(Array) }
     it { is_expected.to be_timestamped_document }
   end
 
   describe 'validations' do
-    it { is_expected.to validate_presence_of(:formatted_address) }
-    it { is_expected.to validate_uniqueness_of(:formatted_address).case_insensitive }
-    it { is_expected.to validate_presence_of(:country) }
-    it { is_expected.to validate_presence_of(:latitude) }
-    it { is_expected.to validate_format_of(:latitude).to_allow('-12.34') }
-    it { is_expected.to validate_presence_of(:longitude) }
-    it { is_expected.to validate_format_of(:longitude).to_allow('5') }
+    it { is_expected.to validate_presence_of(:address) }
   end
 
-  describe '#coordinates' do
-    it 'returns an array of latitude and longitude' do
-      expect(subject.coordinates).to eq([subject.latitude, subject.longitude])
+  describe '#latitude' do
+    it 'returns the second coordinate in #coordinates' do
+      expect(subject.latitude).to eq(subject.coordinates[-1])
+    end
+  end
+
+  describe '#longitude' do
+    it 'returns the first coordinate in #coordinates' do
+      expect(subject.longitude).to eq(subject.coordinates[0])
     end
   end
 end

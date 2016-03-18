@@ -6,41 +6,17 @@
   </div>
 
   <div class="row">
-    <%= form_for(@user, html: { class:"form-horizontal" }) do |f| %>
+    <%= link_to "Add new trip", new_user_trip_path(current_user) %>
 
-      <div class="form-group">
-        <%= f.label :username, nil, class: "col-sm-3 control-label" %>
-        <div class="col-sm-8">
-          <%= f.text_field :username, class: "form-control", disabled: true %>
-        </div>
-      </div>
+    <br/>
 
-      <div class="form-group">
-        <%= f.label :last_name, nil, class: "col-sm-3 control-label" %>
-        <div class="col-sm-8">
-          <%= f.text_field :last_name, class: "form-control", disabled: true %>
-        </div>
-      </div>
-
-      <div class="form-group">
-        <%= f.label :first_name, nil, class: "col-sm-3 control-label" %>
-        <div class="col-sm-8">
-          <%= f.text_field :first_name, class: "form-control", disabled: true %>
-        </div>
-      </div>
-
-      <div class="form-group">
-        <%= f.label :email, nil, class: "col-sm-3 control-label" %>
-        <div class="col-sm-8">
-          <div class="input-group">
-            <div class="input-group-addon">
-              <span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>
-            </div>
-            <%= f.text_field :email, class: "form-control", disabled: true %>
-          </div>
-        </div>
-      </div>
-
+    <table class="table">
+    <% @trips.each do |trip| %>
+      <tr class="active">
+        <td><%= trip.name %></td>
+        <td><%= link_to 'Edit', edit_user_trip_path(@user, trip) %></td>
+      </tr>
     <% end %>
+    </table>
   </div>
 </div>

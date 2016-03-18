@@ -4,6 +4,7 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find_by(username: params[:id])
+    @trips = @user.trips
   end
 
   def new

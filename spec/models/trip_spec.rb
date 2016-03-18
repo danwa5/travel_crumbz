@@ -7,7 +7,8 @@ RSpec.describe Trip, type: :model do
 
   describe 'associations' do
     it { is_expected.to have_and_belong_to_many(:users) }
-    it { is_expected.to have_and_belong_to_many(:locations) }
+    it { is_expected.to embed_many(:locations) }
+    it { is_expected.to accept_nested_attributes_for(:locations) }
   end
 
   describe 'fields' do
@@ -16,6 +17,10 @@ RSpec.describe Trip, type: :model do
   end
 
   describe 'validations' do
+    describe '#name' do
+      it { is_expected.to validate_presence_of(:name) }
+      it { is_expected.to validate_uniqueness_of(:name).scoped_to(:user_ids) }
+    end
     describe '#user_ids' do
       it { is_expected.to validate_presence_of(:user_ids) }
     end

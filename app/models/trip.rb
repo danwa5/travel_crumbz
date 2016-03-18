@@ -3,9 +3,12 @@ class Trip
   include Mongoid::Timestamps
 
   has_and_belongs_to_many :users, class_name: 'User'
-  has_and_belongs_to_many :locations
+  embeds_many :locations
+
+  accepts_nested_attributes_for :locations, :allow_destroy => true
 
   field :name, type: String
 
+  validates :name, presence: true, uniqueness: { case_sensitive: false, scope: :user_ids }
   validates :user_ids, presence: true
 end

@@ -14,19 +14,20 @@ FactoryGirl.define do
   end
 
   factory :trip do
+    sequence(:name) { |n| "Trip ##{n}" }
+
     trait :with_user do
       after(:build) {|trip| trip.users = [create(:user)]}
     end
     trait :with_location do
-      after(:build) {|trip| trip.locations = [create(:location)]}
+      after(:build) {|trip| trip.locations.build(FactoryGirl.attributes_for(:location)) }
     end
   end
 
   factory :location do
     city { Faker::Address.city }
     country { Faker::Address.country }
-    formatted_address { [city, country].join(', ') }
-    latitude { Faker::Address.latitude }
-    longitude { Faker::Address.longitude }
+    address { [city, country].join(', ') }
+    coordinates { [Faker::Address.longitude, Faker::Address.latitude] }
   end
 end

@@ -3,25 +3,26 @@ class Location
   include Mongoid::Timestamps
   include Geocoder::Model::Mongoid
 
-  geocoded_by :formatted_address
+  geocoded_by :address
+  after_validation :geocode, :if => lambda{ |obj| obj.address_changed? }
 
-  field :formatted_address, type: String
+  embedded_in :trip
+
+  field :address, type: String
   field :street_address, type: String
   field :city, type: String
   field :state, type: String
   field :country, type: String
   field :postal_code, type: String
-  field :latitude, type: String
-  field :longitude, type: String
+  field :coordinates, :type => Array
 
-  VALID_COORDINATE_REGEX = /\A-?\d+(\.\d+)?\z/i
+  validates :address, presence: true
 
-  validates :formatted_address, presence: true, uniqueness: { case_sensitive: false }
-  validates :country, presence: true
-  validates :latitude, presence: true, format: { with: VALID_COORDINATE_REGEX }
-  validates :longitude, presence: true, format: { with: VALID_COORDINATE_REGEX }
+  def latitude
+    coordinates[-1].to_s if coordinates.present?
+  end
 
-  def coordinates
-    [latitude, longitude]
+  def longitude
+    coordinates[0].to_s if coordinates.present?
   end
 end
