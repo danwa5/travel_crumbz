@@ -3,15 +3,15 @@ class UsersController < ApplicationController
   before_action :correct_user,   only: [:show, :edit, :update]
 
   def show
-    @user = User.find_by(username: params[:id])
     @trips = @user.trips
 
     # Display locations from last trip in map
     @locations = @trips.last.try(:locations)
 
-    @hash = Gmaps4rails.build_markers(@locations) do |location, marker|
+    @location_hash = Gmaps4rails.build_markers(@locations) do |location, marker|
       marker.lat location.latitude
       marker.lng location.longitude
+      marker.title location.address
       marker.infowindow location.address
     end
   end

@@ -22,6 +22,13 @@ FactoryGirl.define do
     trait :with_location do
       after(:build) {|trip| trip.locations.build(FactoryGirl.attributes_for(:location)) }
     end
+    trait :with_2_locations do
+      after(:build) do |trip|
+        2.times do
+          trip.locations.build(FactoryGirl.attributes_for(:location))
+        end
+      end
+    end
   end
 
   factory :location do
