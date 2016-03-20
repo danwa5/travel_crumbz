@@ -6,13 +6,15 @@ class UsersController < ApplicationController
     @trips = @user.trips
 
     # Display locations from last trip in map
-    @locations = @trips.last.try(:locations)
+    @current_trip = @trips.all.desc('created_at').first
 
-    @location_hash = Gmaps4rails.build_markers(@locations) do |location, marker|
-      marker.lat location.latitude
-      marker.lng location.longitude
-      marker.title location.address
-      marker.infowindow location.address
+    if @current_trip && @current_trip.locations.any?
+      @location_hash = Gmaps4rails.build_markers(@current_trip.locations) do |location, marker|
+        marker.lat location.latitude
+        marker.lng location.longitude
+        marker.title location.address
+        marker.infowindow location.address
+      end
     end
   end
 

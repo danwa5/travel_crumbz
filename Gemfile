@@ -44,6 +44,8 @@ group :development, :test do
 end
 
 group :test do
+  gem 'capybara-webkit'
+  gem 'selenium-webdriver'
   gem 'simplecov', require: false
   gem 'database_cleaner'
 end
