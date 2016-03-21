@@ -1,5 +1,5 @@
 class TripsController < ApplicationController
-  before_action :find_trip, only: [:edit, :update]
+  before_action :find_trip, only: [:edit, :update, :destroy]
 
   def new
     @trip = user.trips.build
@@ -27,6 +27,12 @@ class TripsController < ApplicationController
     end
   end
 
+  def destroy
+    @trip.destroy
+    flash[:success] = 'Trip deleted!'
+    redirect_to @user
+  end
+
   private
 
   def trip_params
@@ -38,6 +44,10 @@ class TripsController < ApplicationController
   end
 
   def find_trip
-    @trip = user.trips.find(params[:id])
+    if current_user?(user)
+      @trip = user.trips.find(params[:id])
+    else
+      redirect_to(user_path(current_user))
+    end
   end
 end

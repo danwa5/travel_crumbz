@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe 'Trips', type: :feature do
-  let(:user) { create(:user) }
+  let(:user) { create(:user, :with_trip) }
   before { sign_in(user) }
 
   describe 'GET /account/:user_id/trips/new' do
@@ -23,11 +23,24 @@ RSpec.describe 'Trips', type: :feature do
       click_button 'Update Trip'
       trip.reload
       expect(trip.name).to eq('Trip 2')
-    end
-    it 'redirects user to show page with flash message' do
-      click_button 'Update Trip'
       expect(current_path).to eq(user_path(user))
       # is_expected.to have_selector('div.alert.alert-success', text: 'Trip updated')
+    end
+    it 'must have cancel button that redirects to user show page' do
+      click_on 'Cancel'
+      expect(current_path).to eq(user_path(user))
+    end
+  end
+
+  describe 'DELETE /account/:user_id/trips/:id' do
+    it 'must delete trip' do
+      expect { click_link 'Delete trip' }.to change(Trip, :count).by(-1)
+      expect(user.trips.count).to eq(0)
+    end
+    xit 'redirects to user show page with flash message' do
+      click_link 'Delete Trip'
+      expect(current_path).to eq(user_path(user))
+      # is_expected.to have_selector('div.alert.alert-success', text: 'Trip deleted')
     end
   end
 end
