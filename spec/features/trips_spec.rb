@@ -10,6 +10,12 @@ RSpec.describe 'Trips', type: :feature do
       fill_in 'Name', with: 'Round the World'
       expect { click_button 'Add new trip' }.to change(Trip, :count).by(1)
     end
+    xit 'can create new a trip with location', js: true do
+      fill_in 'Name', with: 'Round the World'
+      click_button 'Add Location'
+      fill_in 'Location 1', with: 'Sydney, Australia'
+      expect { click_button 'Add new trip' }.to change(Trip, :count).by(1)
+    end
   end
 
   describe 'GET /account/:user_id/trips/:id/edit' do
