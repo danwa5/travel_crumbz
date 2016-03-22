@@ -19,7 +19,7 @@
         <% if @current_trip %>
           <% @trips.each do |trip| %>
             <li<%= trip == @current_trip && @trips.count > 1 ? ' class=active' : '' %>>
-              <%= link_to trip.name, user_trip_path(current_user, trip) %>
+              <%= link_to trip.name, user_path(current_user, trip: trip.slug) %>
             </li>
           <% end %>
         <% else %>

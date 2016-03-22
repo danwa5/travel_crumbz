@@ -29,6 +29,11 @@ RSpec.describe Trip, type: :model do
     end
   end
 
+  describe 'scopes' do
+    xdescribe '#most_recent' do
+    end
+  end
+
   describe '#created_at / #updated_at' do
     it { expect(subject.created_at).to be_present }
     it { expect(subject.updated_at).to be_present }

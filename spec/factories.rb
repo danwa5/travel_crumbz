@@ -11,6 +11,16 @@ FactoryGirl.define do
     trait :with_trip do
       after(:build) {|user| user.trips = [create(:trip, user_ids: [user.id])]}
     end
+
+    trait :with_3_trips do
+      after(:build) do |user|
+        user.trips = [
+          create(:trip, user_ids: [user.id]),
+          create(:trip, user_ids: [user.id]),
+          create(:trip, user_ids: [user.id])
+        ]
+      end
+    end
   end
 
   factory :trip do

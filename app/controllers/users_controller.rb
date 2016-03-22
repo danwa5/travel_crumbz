@@ -5,11 +5,8 @@ class UsersController < ApplicationController
   def show
     @trips = @user.trips
 
-    # Display locations from last trip in map
-    @current_trip = @trips.all.desc('created_at').first
-
-    if @current_trip && @current_trip.locations.any?
-      @location_hash = Gmaps4rails.build_markers(@current_trip.locations) do |location, marker|
+    if current_trip && current_trip.locations.any?
+      @location_hash = Gmaps4rails.build_markers(current_trip.locations) do |location, marker|
         marker.lat location.latitude
         marker.lng location.longitude
         marker.title location.address
@@ -63,5 +60,9 @@ class UsersController < ApplicationController
       end
     end
     # redirect_to(signin_path) unless current_user?(@user)
+  end
+
+  def current_trip
+    @current_trip = (current_user.trips.find_by(_slugs: params[:trip]) if params[:trip].present?) || @trips.most_recent.first
   end
 end
