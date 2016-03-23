@@ -9,16 +9,12 @@ FactoryGirl.define do
     email_confirmed true
 
     trait :with_trip do
-      after(:build) {|user| user.trips = [create(:trip, user_ids: [user.id])]}
+      after(:build) { |user| user.trips = [create(:trip, user_ids: [user.id])] }
     end
 
     trait :with_3_trips do
       after(:build) do |user|
-        user.trips = [
-          create(:trip, user_ids: [user.id]),
-          create(:trip, user_ids: [user.id]),
-          create(:trip, user_ids: [user.id])
-        ]
+        user.trips = create_list(:trip, 3, user_ids: [user.id])
       end
     end
   end
@@ -27,10 +23,10 @@ FactoryGirl.define do
     sequence(:name) { |n| "Trip ##{n}" }
 
     trait :with_user do
-      after(:build) {|trip| trip.users = [create(:user)]}
+      after(:build) { |trip| trip.users = [create(:user)] }
     end
     trait :with_location do
-      after(:build) {|trip| trip.locations.build(FactoryGirl.attributes_for(:location)) }
+      after(:build) { |trip| trip.locations.build(FactoryGirl.attributes_for(:location)) }
     end
     trait :with_2_locations do
       after(:build) do |trip|
