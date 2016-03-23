@@ -6,7 +6,7 @@
   </div>
 
   <div class="row">
-    <%= form_for([@user, @trip], html: { class:"form-horizontal" }) do |f| %>
+    <%= form_for([@user, @trip], html: { class:"form-horizontal edit-trip" }) do |f| %>
       <%= render 'shared/error_messages', object: f.object %>
 
       <div class="form-group">
@@ -16,7 +16,7 @@
         </div>
       </div>
 
-      <div id="existing-locations">
+      <div id="locations">
       <% counter = 0 %>
       <%= f.fields_for :locations do |location| %>
         <% counter += 1 %>
@@ -30,9 +30,9 @@
       </div>
 
       <div class="form-group">
-        <div class="col-sm-5 col-sm-offset-3">
+        <div class="col-sm-7 col-sm-offset-3">
           <%= f.submit "Update Trip", class: "btn btn-large btn-primary" %>
-          <button type="button" id="addLocationButton" class="btn btn-info">Add Location</button>
+          <button type="button" id="add-location-button" class="btn btn-info">Add Location</button>
           <%= link_to "Cancel", user_path(@user), class: "btn btn-default" %>
         </div>
       </div>
