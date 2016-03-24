@@ -4,7 +4,19 @@ class Location
   include Geocoder::Model::Mongoid
 
   geocoded_by :address
-  after_validation :geocode, :if => lambda{ |obj| obj.address_changed? }
+
+  reverse_geocoded_by :coordinates do |object,results|
+    if geo = results.first
+      object.street_number  = geo.street_number
+      object.route          = geo.route
+      object.city           = geo.city
+      object.state_province = geo.state
+      object.country        = geo.country
+      object.postal_code    = geo.postal_code
+    end
+  end
+
+  after_validation :geocode, :reverse_geocode, :if => lambda{ |obj| obj.address_changed? }
 
   embedded_in :trip
 
