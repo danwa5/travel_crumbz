@@ -92,5 +92,9 @@ handler.buildMap({ provider: {}, internal: {id: 'map'}}, function() {
   handler.bounds.extendWith(markers);
   handler.bounds.extendWith(polylines);
   handler.fitMapToBounds();
+
+  if (json_array.length === 1) {
+    handler.getMap().setZoom(11);
+  }
 });
 </script>
