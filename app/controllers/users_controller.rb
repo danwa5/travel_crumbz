@@ -10,7 +10,7 @@ class UsersController < ApplicationController
         marker.lat location.latitude
         marker.lng location.longitude
         marker.title location.address
-        marker.infowindow location.address
+        marker.infowindow location.full_address
       end
     end
   end

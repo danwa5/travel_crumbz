@@ -3,24 +3,26 @@ class Location
   include Mongoid::Timestamps
   include Geocoder::Model::Mongoid
 
-  geocoded_by :address
-
-  reverse_geocoded_by :coordinates do |object,results|
-    if geo = results.first
-      object.street_number  = geo.street_number
-      object.route          = geo.route
-      object.city           = geo.city
-      object.state_province = geo.state
-      object.country        = geo.country
-      object.postal_code    = geo.postal_code
+  geocoded_by :address do |loc, results|
+    if result = results.first
+      dm = DataMappers::Geocoder.new(result.data).mapped
+      loc.full_address   = dm['full_address']
+      loc.street_number  = dm['street_number']
+      loc.route          = dm['route']
+      loc.city           = dm['city']
+      loc.state_province = dm['state_province']
+      loc.country        = dm['country']
+      loc.postal_code    = dm['postal_code']
+      loc.coordinates    = result.coordinates.reverse
     end
   end
 
-  after_validation :geocode, :reverse_geocode, :if => lambda{ |obj| obj.address_changed? }
+  after_validation :geocode, :if => lambda{ |obj| obj.address_changed? }
 
   embedded_in :trip
 
   field :address, type: String
+  field :full_address, type: String
   field :street_number, type: String
   field :route, type: String
   field :city, type: String
