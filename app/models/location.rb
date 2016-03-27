@@ -29,9 +29,13 @@ class Location
   field :state_province, type: String
   field :country, type: String
   field :postal_code, type: String
-  field :coordinates, :type => Array
+  field :coordinates, type: Array
+  field :order, type: Integer
 
   validates :address, presence: true
+  validates :order, uniqueness: true
+
+  default_scope -> { order_by(order: :asc) }
 
   def latitude
     coordinates[-1].to_s if coordinates.present?

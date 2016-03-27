@@ -12,13 +12,14 @@ RSpec.describe Location, type: :model do
   end
 
   describe 'fields' do
-    it { is_expected.to have_fields(:address, :full_address, :street_number, :route, :city, :state_province, :country, :postal_code) }
+    it { is_expected.to have_fields(:address, :full_address, :street_number, :route, :city, :state_province, :country, :postal_code, :order) }
     it { is_expected.to have_field(:coordinates).of_type(Array) }
     it { is_expected.to be_timestamped_document }
   end
 
   describe 'validations' do
     it { is_expected.to validate_presence_of(:address) }
+    it { is_expected.to validate_uniqueness_of(:order) }
   end
 
   describe '#latitude' do

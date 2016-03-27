@@ -21,9 +21,12 @@
       <%= f.fields_for :locations do |location| %>
         <% counter += 1 %>
         <div class="form-group">
-          <%= location.label :address, "Location #{counter}" , class: "col-sm-3 control-label" %>
-          <div class="col-sm-8">
+          <%= location.label :address, "Location" , class: "col-sm-3 control-label" %>
+          <div class="col-sm-7">
             <%= location.text_field :address, {class: "form-control"} %>
+          </div>
+          <div class="col-sm-1">
+            <%= location.text_field :order, {class: "form-control location-order"} %>
           </div>
         </div>
       <% end %>
