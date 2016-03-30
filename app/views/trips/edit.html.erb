@@ -21,12 +21,14 @@
       <%= f.fields_for :locations do |location| %>
         <% counter += 1 %>
         <div class="form-group">
-          <%= location.label :address, "Location" , class: "col-sm-3 control-label" %>
-          <div class="col-sm-7">
-            <%= location.text_field :address, {class: "form-control"} %>
-          </div>
-          <div class="col-sm-1">
-            <%= location.text_field :order, {class: "form-control location-order"} %>
+          <%= location.label :address, "Location", class: "col-sm-3 control-label" %>
+          <div class="col-sm-8">
+            <div class="input-group">
+              <span class="input-group-addon">
+                <%= location.text_field :order, size: 4, class: "location-order", data: { toggle: 'tooltip', placement: 'top' }, title: 'Select and edit the order of location in the trip' %>
+              </span>
+              <%= location.text_field :address, {class: "form-control"} %>
+            </div>
           </div>
         </div>
       <% end %>
