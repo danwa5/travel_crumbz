@@ -6,12 +6,7 @@ class UsersController < ApplicationController
     @trips = @user.trips
 
     if current_trip && current_trip.locations.any?
-      @location_hash = Gmaps4rails.build_markers(current_trip.locations) do |location, marker|
-        marker.lat location.latitude
-        marker.lng location.longitude
-        marker.title location.address
-        marker.infowindow location.full_address
-      end
+      @location_hash = GoogleMaps::MappingService.call(current_trip.locations)
     end
   end
 

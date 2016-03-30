@@ -21,6 +21,7 @@ RSpec.describe 'Trips', type: :feature do
   describe 'GET /account/:user_id/trips/:id/edit' do
     let(:trip) { create(:trip, :with_location, user_ids: [user.id], name: 'Trip 1')}
     before do
+      make_google_maps_stub_request
       visit edit_user_trip_path(user, trip)
       fill_in 'Name', with: 'Trip 2'
       fill_in 'Location', with: 'Mendoza, Argentina'
@@ -48,5 +49,11 @@ RSpec.describe 'Trips', type: :feature do
       expect(current_path).to eq(user_path(user))
       # is_expected.to have_selector('div.alert.alert-success', text: 'Trip deleted')
     end
+  end
+
+  def make_google_maps_stub_request
+    stub_request(:get, /maps.googleapis.com\/maps\/api\/geocode\/.+/).
+      with(:headers => {'Accept'=>'*/*', 'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3', 'User-Agent'=>'Ruby'}).
+      to_return(:status => 200, :body => "", :headers => {})
   end
 end

@@ -47,4 +47,5 @@ group :test do
   gem 'database_cleaner'
   gem 'selenium-webdriver'
   gem 'simplecov', require: false
+  gem 'webmock'
 end

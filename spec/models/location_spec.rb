@@ -3,6 +3,8 @@ require 'rails_helper'
 RSpec.describe Location, type: :model do
   subject { build(:location) }
 
+  before { make_google_maps_stub_request }
+
   it 'has a valid factory' do
     expect(build(:location)).to be_valid
   end
@@ -32,5 +34,11 @@ RSpec.describe Location, type: :model do
     it 'returns the first coordinate in #coordinates' do
       expect(subject.longitude).to eq(subject.coordinates[0])
     end
+  end
+
+  def make_google_maps_stub_request
+    stub_request(:get, /maps.googleapis.com\/maps\/api\/geocode\/.+/).
+      with(:headers => {'Accept'=>'*/*', 'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3', 'User-Agent'=>'Ruby'}).
+      to_return(:status => 200, :body => "", :headers => {})
   end
 end
