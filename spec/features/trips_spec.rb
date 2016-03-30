@@ -29,7 +29,7 @@ RSpec.describe 'Trips', type: :feature do
       click_button 'Update Trip'
       trip.reload
       expect(trip.name).to eq('Trip 2')
-      expect(current_path).to eq(user_path(user))
+      expect(current_url).to eq(user_url(user, trip: trip.slug))
       # is_expected.to have_selector('div.alert.alert-success', text: 'Trip updated')
     end
     it 'must have cancel button that redirects to user show page' do

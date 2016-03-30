@@ -21,7 +21,7 @@ class TripsController < ApplicationController
   def update
     if @trip.update_attributes(trip_params)
       flash[:success] = 'Trip updated!'
-      redirect_to user_path(user)
+      redirect_to user_path(user, trip: @trip.slug)
     else
       render 'edit'
     end
