@@ -73,7 +73,8 @@ function createSidebar(json_array){
 };
 
 var handler = Gmaps.build('Google');
-handler.buildMap({ provider: {}, internal: {id: 'map'}}, function() {
+var provider_options = { scrollwheel: false };
+handler.buildMap({ provider: provider_options, internal: {id: 'map'}}, function() {
   var json_array = <%=raw @location_hash.to_json %>;
 
   var markers = handler.addMarkers(json_array);
