@@ -3,7 +3,9 @@ Rails.application.routes.draw do
     member do
       get :confirm_email
     end
-    resources :trips
+    resources :trips do
+      resources :photos, only: [:create]
+    end
   end
 
   resources :sessions, only: [:new, :create, :destroy]

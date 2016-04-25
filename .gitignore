@@ -17,3 +17,6 @@
 /tmp
 coverage/
 .byebug_history
+/app/models/.DS_Store
+/spec/models/.DS_Store
+/public/uploads/*

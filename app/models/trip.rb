@@ -5,6 +5,7 @@ class Trip
 
   has_and_belongs_to_many :users, class_name: 'User'
   embeds_many :locations, cascade_callbacks: true
+  embeds_many :photos
 
   accepts_nested_attributes_for :locations, :allow_destroy => true
 

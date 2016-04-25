@@ -12,6 +12,7 @@ RSpec.describe Trip, type: :model do
     it { is_expected.to have_and_belong_to_many(:users) }
     it { is_expected.to embed_many(:locations) }
     it { is_expected.to accept_nested_attributes_for(:locations) }
+    it { is_expected.to embed_many(:photos) }
   end
 
   describe 'fields' do
