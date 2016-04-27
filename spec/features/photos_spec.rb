@@ -11,13 +11,26 @@ RSpec.describe 'Photos', type: :feature do
   end
 
   describe 'POST /account/:user_id/trips/:trip_id/photos' do
-    it 'can upload a new photo' do
+    before do
       expect(trip.photos.count).to eq(0)
       click_button 'Upload Photos'
       page.attach_file('photo_original_file', image_file)
       click_button 'Upload'
       trip.reload
+    end
+
+    it 'uploads a new photo' do
       expect(trip.photos.count).to eq(1)
+    end
+
+    it 'saves the original photo with the correct path' do
+      photo = trip.photos.first
+      expect(photo.original_file.url).to end_with("photo/#{photo.id}/original_file.#{photo.original_file.file.extension}")
+    end
+
+    it 'saves the thumbnail with the correct path' do
+      photo = trip.photos.first
+      expect(photo.original_file.thumbnail.url).to end_with("photo/#{photo.id}/thumbnail_original_file.#{photo.original_file.file.extension}")
     end
   end
 end
