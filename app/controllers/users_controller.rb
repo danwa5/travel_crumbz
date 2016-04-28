@@ -4,6 +4,7 @@ class UsersController < ApplicationController
 
   def show
     @trips = @user.trips
+    @photos = current_trip.try(:photos)
 
     if current_trip && current_trip.locations.any?
       @location_hash = GoogleMaps::MappingService.call(current_trip.locations)
