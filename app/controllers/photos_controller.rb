@@ -5,7 +5,7 @@ class PhotosController < ApplicationController
     if @photo.save
       flash[:success] = 'Photo successfully added!'
     else
-      flash[:danger] = 'Photo upload failed!'
+      flash[:danger] = 'Photo upload failed! Kindly note a trip cannot contain duplicate photos.'
     end
     redirect_to current_user
   end

@@ -48,4 +48,8 @@ class PhotoUploader < CarrierWave::Uploader::Base
     "#{mounted_as}.#{model.original_file.file.extension}" if original_filename
   end
 
+  def checksum
+    @checksum ||= Digest::MD5.hexdigest(model.send(mounted_as).read.to_s)
+  end
+
 end
