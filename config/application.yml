@@ -1,3 +1,8 @@
 MAILGUN_DOMAIN: sandbox0187bcf9dca741b8aa95ffce785aa10b.mailgun.org
 MAILGUN_USER: postmaster@sandbox0187bcf9dca741b8aa95ffce785aa10b.mailgun.org
 MAILGUN_PSWD: c56fc11fee2a8d04785e60b6accb8ea5
+
+AWS_BUCKET_NAME: travel-crumbz
+AWS_ACCESS_KEY_ID: AKIAIFC4HJDHTKJOPZKQ
+AWS_SECRET_ACCESS_KEY: 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
+AWS_REGION: us-west-1

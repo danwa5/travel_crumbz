@@ -20,3 +20,6 @@ coverage/
 /app/models/.DS_Store
 /spec/models/.DS_Store
 /public/uploads/*
+
+# Ignore application configuration
+/config/application.yml
