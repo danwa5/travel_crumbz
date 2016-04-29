@@ -22,7 +22,7 @@ gem 'figaro'
 gem 'geocoder', '~> 1.3', '>= 1.3.1'
 gem 'gmaps4rails', '~> 2.1', '>= 2.1.2'
 gem 'mongoid-slug', '~> 5.2'
-gem 'fog', '~> 1.38'
+gem 'fog', require: 'fog/aws'
 gem 'carrierwave-mongoid', '~> 0.8.1'
 gem 'mini_magick', '~> 4.5', '>= 4.5.1'
 
