@@ -2,6 +2,8 @@ source 'https://rubygems.org'
 
 gem 'rails', '4.2.6'
 
+gem 'puma', '~> 3.4'
+
 gem 'mongo'
 gem 'mongoid'
 
