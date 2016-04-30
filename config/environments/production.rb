@@ -76,4 +76,16 @@ Rails.application.configure do
 
   # Do not dump schema after migrations.
   # config.active_record.dump_schema_after_migration = false
+
+  config.action_mailer.default_url_options = { :host => 'travel-crumbz.herokuapp.com' }
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    :address              => 'smtp.mailgun.org',
+    :port                 => 587,
+    :domain               => Figaro.env.mailgun_domain,
+    :user_name            => Figaro.env.mailgun_user,
+    :password             => Figaro.env.mailgun_pswd,
+    :authentication       => :plain,
+    :enable_starttls_auto => true
+  }
 end
