@@ -82,7 +82,11 @@ RSpec.describe 'Authentication', type: :feature do
     end
 
     context 'when submitting with invalid credentials' do
-      before { click_button submit }
+      before do
+        within('#sign-in-panel') do
+          click_button submit
+        end
+      end
       it 'redirects user to sign-in page with warning message' do
         expect(current_path).to eq(signin_path)
         is_expected.to have_selector('div.alert.alert-danger', text: 'Invalid email/password combination')
@@ -91,9 +95,11 @@ RSpec.describe 'Authentication', type: :feature do
 
     context 'when submitting with valid credentials' do
       before do
-        fill_in 'Email', with: user.email
-        fill_in 'Password', with: '111111'
-        click_button submit
+        within('#sign-in-panel') do
+          fill_in 'Email', with: user.email
+          fill_in 'Password', with: '111111'
+          click_button submit
+        end
       end
       context 'but without activating account thru email confirmation' do
         let(:user) { create(:user, password: '111111', email_confirmed: false) }
