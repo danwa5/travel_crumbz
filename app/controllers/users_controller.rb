@@ -55,7 +55,6 @@ class UsersController < ApplicationController
         redirect_to(signin_path)
       end
     end
-    # redirect_to(signin_path) unless current_user?(@user)
   end
 
   def current_trip
