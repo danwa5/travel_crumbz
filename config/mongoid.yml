@@ -158,3 +158,6 @@ production:
        # We recommend 15 because it allows for plenty of time
        # in most operating environments.
        connect_timeout: 15
+
+       # Raise an error when performing a #find and the document is not found.
+       raise_not_found_error: false
