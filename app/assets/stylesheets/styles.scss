@@ -35,7 +35,7 @@ body {
 .header {
   position: relative;
   background-color: #fff;
-  height: 51px;
+  height: 52px;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
@@ -43,6 +43,15 @@ body {
 
 /*  Home
 ----------------------------------------------------------*/
+
+@media screen and (min-width: 992px) {
+  .blog-content > .container > .row .col-md-9 {
+    width: 71.8%;
+  }
+  .blog-content > .container > .row .col-md-3 {
+    width: 28.2%;
+  }
+}
 
 .blog-heading {
   position: relative;
@@ -93,6 +102,10 @@ body {
   margin-bottom: 0;
 }
 
+.blog-content {
+  padding: 30px 15px;
+}
+
 /*  Trip
 ----------------------------------------------------------*/
 
@@ -128,4 +141,41 @@ body {
 
 .sign-in-button {
   width: 100%;
+}
+
+/*  Media Variations
+----------------------------------------------------------*/
+
+@media screen and (min-width: 1200px) {
+  .container {
+    width: 1100px;
+  }
+}
+
+@media screen and (max-width: 720px) {
+  .blog-heading {
+    padding: 100px 0;
+  }
+}
+
+@media screen and (max-width: 640px) {
+
+}
+
+@media screen and (max-width: 620px) {
+
+}
+
+@media screen and (max-width: 480px) {
+  .blog-heading {
+    padding: 30px 0;
+  }
+
+  .blog-heading h1 {
+    font-size: 22px;
+  }
+
+  .blog-heading .description {
+    font-size: 13px;
+  }
 }

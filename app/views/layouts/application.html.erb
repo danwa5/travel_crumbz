@@ -21,30 +21,36 @@
     <%= render 'layouts/header' %>
     <%= render 'layouts/jumbotron' %>
 
-    <div class="container">
-      <div class="row">
+    <!-- BLOG MAIN CONTENT -->
+    <section class="blog-content">
+      <div class="container">
+        <div class="row">
 
-        <div class="col-sm-9">
-          <% flash.each do |key, value| %>
-            <div class="alert alert-<%= key %>">
-              <a class="close" data-dismiss="alert">×</a>
-              <%= value %>
-            </div>
-          <% end %>
+          <div class="col-sm-9">
+            <% flash.each do |key, value| %>
+              <div class="alert alert-<%= key %>">
+                <a class="close" data-dismiss="alert">×</a>
+                <%= value %>
+              </div>
+            <% end %>
 
-          <%= yield %>
-        </div>
+            <%= yield %>
+          </div>
 
-        <div class="col-sm-3">
-        </div>
+          <div class="col-sm-3">
+          </div>
 
-      </div><!-- /.row -->
+        </div><!-- /.row -->
 
-      <hr>
+        <hr>
 
-      <%#= render 'layouts/footer' %>
-      <%= debug(params) if Rails.env.development? %>
+        <%#= render 'layouts/footer' %>
+        <%= debug(params) if Rails.env.development? %>
 
-    </div> <!-- /container -->
+      </div>
+      <!-- /container -->
+    </section>
+    <!-- /SECTION -->
+
   </body>
 </html>
