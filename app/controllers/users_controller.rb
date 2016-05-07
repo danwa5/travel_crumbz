@@ -27,7 +27,7 @@ class UsersController < ApplicationController
   end
 
   def confirm_email
-    user = User.find_by(confirm_token: params[:id])
+    user = User.where(confirm_token: params[:id]).first
     if user
       user.email_activate
       sign_in user
