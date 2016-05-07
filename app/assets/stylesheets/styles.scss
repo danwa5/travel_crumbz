@@ -25,8 +25,36 @@ body {
   letter-spacing: 0.01em;
 }
 
+.h2, h2 {
+  font-family: "Droid Serif", serif;
+  font-weight: 400;
+  font-size: 30px;
+  color: #484848;
+  line-height: 1.4em;
+  letter-spacing: 0.02em;
+}
+
 .container {
   position: relative;
+}
+
+.tb {
+  display: table;
+  width: 100%;
+}
+
+.tb-cell {
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.btn-primary,
+.btn-primary:hover,
+.btn-primary:active,
+.btn-primary:visited,
+.btn-primary:focus {
+  background-color: #1abc9c !important;
+  border-color: #1abc9c;
 }
 
 /*  Header
@@ -43,15 +71,6 @@ body {
 
 /*  Home
 ----------------------------------------------------------*/
-
-@media screen and (min-width: 992px) {
-  .blog-content > .container > .row .col-md-9 {
-    width: 71.8%;
-  }
-  .blog-content > .container > .row .col-md-3 {
-    width: 28.2%;
-  }
-}
 
 .blog-heading {
   position: relative;
@@ -102,8 +121,30 @@ body {
   margin-bottom: 0;
 }
 
-.blog-content {
-  padding: 30px 15px;
+.search-section {
+  background-color: #f1f2f4;
+}
+
+.search-section .tb {
+  padding: 50px 0;
+  max-width: 1000px;
+  margin: auto;
+}
+
+.search-section .tb .tb-cell {
+  width: 50%;
+  .text-content {
+    text-align: center;
+    padding: 0 15px;
+  }
+  h2 {
+    font-size: 20px;
+    font-weight: 400;
+    margin-top: 0;
+  }
+  p {
+    margin-bottom: 0;
+  }
 }
 
 /*  Trip
@@ -155,6 +196,17 @@ body {
 @media screen and (max-width: 720px) {
   .blog-heading {
     padding: 100px 0;
+  }
+
+  .search-section .tb,
+  .search-section .tb .tb-cell {
+    display: block;
+    width: 100%;
+  }
+
+  .search-section .search-box {
+    max-width: 400px;
+    margin: 20px auto 0;
   }
 }
 
