@@ -23,18 +23,22 @@
 
     <!-- MAIN CONTENT -->
     <section class="main-content">
-      <div class="row">
-        <div class="col-sm-12 ">
-          <% flash.each do |key, value| %>
-            <div class="alert alert-<%= key %>">
-              <a class="close" data-dismiss="alert">×</a>
-              <%= value %>
-            </div>
-          <% end %>
+      <div class="flash-messages">
+        <% flash.each do |key, value| %>
+          <div class="alert alert-<%= key %>">
+            <a class="close" data-dismiss="alert">×</a>
+            <%= value %>
+          </div>
+        <% end %>
+      </div>
 
-          <%= yield %>
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-12">
+            <%= yield %>
+          </div>
         </div>
-      </div><!-- /.row -->
+      </div>
 
       <hr>
 

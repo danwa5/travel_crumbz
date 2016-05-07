@@ -6,3 +6,30 @@
     </div>
   </div>
 </section>
+
+<% if current_page?(home_path) %>
+<!-- SEARCH -->
+<section class="search-section">
+  <div class="container">
+    <div class="tb">
+      <div class="tb-cell">
+        <div class="text-content">
+          <h2>Where do you want to travel?</h2>
+          <p>Search through our thousands of locations!</p>
+        </div>
+      </div>
+      <div class="tb-cell">
+        <div class="search-box">
+          <div class="input-group">
+            <input type="text" class="form-control" placeholder="Places, locations, attractions">
+            <span class="input-group-btn">
+              <button class="btn btn-primary" type="button">SEARCH</button>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- /SEARCH -->
+<% end %>
