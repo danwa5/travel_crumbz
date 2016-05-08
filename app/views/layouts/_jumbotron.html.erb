@@ -1,35 +1,65 @@
-<section class="blog-heading text-center">
-  <div class="container">
-    <h1 class="text-uppercase">Where have you been?</h1>
-    <div class="description">
-      <p>Oh, you forgot?! Well you better digitize yo shit now!</p>
-    </div>
-  </div>
-</section>
+<% if signed_in? && current_page?(user_path(current_user)) %>
+  <!-- PHOTO GRID -->
+  <section class="featured">
+    <div id="ri-grid" class="ri-grid ri-grid-size-3">
+      <ul class="pi-thumbs">
 
-<% if current_page?(home_path) %>
-<!-- SEARCH -->
-<section class="search-section">
-  <div class="container">
-    <div class="tb">
-      <div class="tb-cell">
-        <div class="text-content">
-          <h2>Where do you want to travel?</h2>
-          <p>Search through our thousands of locations!</p>
-        </div>
+      <% (1..12).each do |index| %>
+        <li>
+          <%= link_to("#") do %>
+            <%= image_tag("/featured/#{index}.jpg") %>
+            <div class="caption">
+              <div class="inner">
+                <i class="pi-plus"></i>
+                <h4>TRIP NAME</h4>
+              </div>
+            </div>
+          <% end %>
+        </li>
+      <% end %>
+
+      </ul>
+    </div>
+    <%= link_to(new_user_trip_path(current_user), {class: 'view-all'}) do %>
+      <i class="pi-plus"></i>
+      <span>ADD A TRIP</span>
+    <% end %>
+  </section>
+  <!-- /PHOTO GRID -->
+<% else %>
+  <section class="blog-heading text-center">
+    <div class="container">
+      <h1 class="text-uppercase">Where have you been?</h1>
+      <div class="description">
+        <p>Oh, you forgot?! Well you better digitize yo shit now!</p>
       </div>
-      <div class="tb-cell">
-        <div class="search-box">
-          <div class="input-group">
-            <input type="text" class="form-control" placeholder="Places, locations, attractions">
-            <span class="input-group-btn">
-              <button class="btn btn-primary" type="button">SEARCH</button>
-            </span>
+    </div>
+  </section>
+
+  <% if current_page?(home_path) %>
+    <!-- SEARCH -->
+    <section class="search-section">
+      <div class="container">
+        <div class="tb">
+          <div class="tb-cell">
+            <div class="text-content">
+              <h2>Where do you want to travel?</h2>
+              <p>Search through our thousands of locations!</p>
+            </div>
+          </div>
+          <div class="tb-cell">
+            <div class="search-box">
+              <div class="input-group">
+                <input type="text" class="form-control" placeholder="Places, locations, attractions">
+                <span class="input-group-btn">
+                  <button class="btn btn-primary" type="button">SEARCH</button>
+                </span>
+              </div>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  </div>
-</section>
-<!-- /SEARCH -->
+    </section>
+    <!-- /SEARCH -->
+  <% end %>
 <% end %>
