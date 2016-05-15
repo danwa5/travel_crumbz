@@ -3,7 +3,7 @@ Rails.application.routes.draw do
     member do
       get :confirm_email
     end
-    resources :trips do
+    resources :trips, except: [:index] do
       resources :photos, only: [:create]
     end
   end

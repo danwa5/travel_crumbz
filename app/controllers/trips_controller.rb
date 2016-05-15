@@ -1,5 +1,13 @@
 class TripsController < ApplicationController
-  before_action :find_trip, only: [:edit, :update, :destroy]
+  before_action :find_trip, only: [:show, :edit, :update, :destroy]
+
+  def show
+    @photos = @trip.try(:photos)
+
+    if @trip && @trip.locations.any?
+      @location_hash = GoogleMaps::MappingService.call(@trip.locations)
+    end
+  end
 
   def new
     @trip = user.trips.build

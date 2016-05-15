@@ -323,6 +323,84 @@ body {
 /*  Trip
 ----------------------------------------------------------*/
 
+#map {
+  width: 800px;
+  height: 400px;
+}
+
+#trip-body {
+  position: relative;
+  border: 1px solid #f2f2f2;
+  border-top: 0;
+  padding: 35px 46px 35px 128px;
+  min-height: 308px;
+  text-align: left;
+}
+
+.trip-meta {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  padding: 20px 0;
+  border-right: 1px solid #f2f2f2;
+}
+
+#trip-body .trip-meta .trip-view,
+#trip-body .trip-meta .trip-like,
+#trip-body .trip-meta .trip-comment,
+#trip-body .trip-meta .trip-location {
+  color: #676767;
+  text-align: center;
+  width: 82px;
+  padding: 15px 0;
+  border-bottom: 1px solid #f2f2f2;
+  -webkit-transition: all 0.3s ease;
+  -moz-transition: all 0.3s ease;
+  -ms-transition: all 0.3s ease;
+  -o-transition: all 0.3s ease;
+  transition: all 0.3s ease;
+}
+
+.post-view .fa,
+.post-like .fa,
+.post-comment .fa,
+.post-location .fa {
+  font-size: 20px;
+  display: block;
+}
+
+.list-group .label {
+  white-space: normal;
+}
+
+.label-location {
+  margin-right: 5px;
+}
+
+.count {
+  display: block;
+  color: inherit;
+  font-family: "Droid Serif", serif;
+  font-size: 12px;
+  margin-top: 6px;
+}
+
+.trip-body-places .place {
+  position: relative;
+  display: inline-block;
+  color: #676767;
+  text-align: center;
+  width: 82px;
+  padding: 15px 0;
+  border-bottom: 1px solid #f2f2f2;
+  -webkit-transition: all 0.3s ease;
+  -moz-transition: all 0.3s ease;
+  -ms-transition: all 0.3s ease;
+  -o-transition: all 0.3s ease;
+  transition: all 0.3s ease;
+}
+
 #accordion {
   padding-top: 5px;
 }
