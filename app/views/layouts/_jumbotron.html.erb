@@ -4,10 +4,10 @@
     <div id="ri-grid" class="ri-grid ri-grid-size-3">
       <ul class="pi-thumbs">
 
-      <% (1..12).each do |index| %>
+      <% current_user.grid_photos.each do |photo| %>
         <li>
           <%= link_to("#") do %>
-            <%= image_tag("/featured/#{index}.jpg") %>
+            <%= image_tag(photo) %>
             <div class="caption">
               <div class="inner">
                 <i class="pi-plus"></i>

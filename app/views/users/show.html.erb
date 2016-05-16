@@ -51,7 +51,7 @@
         <div class="panel-body">
           <% @photos.each do |photo| %>
             <div class="thumbnail">
-              <%= image_tag(photo.original_file.thumbnail.url, class: "img-responsive img-rounded") %>
+              <%= image_tag(photo.original_file.small.url, class: "img-responsive img-rounded") %>
             </div>
           <% end %>
         </div>

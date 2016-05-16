@@ -19,8 +19,10 @@ coverage/
 .byebug_history
 /app/models/.DS_Store
 /spec/models/.DS_Store
-/public/uploads/*
 /public/assets/
+/public/featured/archive/
+/public/uploads/*
+.DS_Store
 
 # Ignore application configuration
 /config/application.yml

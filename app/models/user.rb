@@ -67,6 +67,22 @@ class User
     save!(:validate => false)
   end
 
+  def grid_photos
+    photos = []
+    if trips.present?
+      my_photos = trips.map { |t| t.photos }.flatten
+      my_photos.each { |photo| photos << photo.original_file.medium.url }
+    end
+
+    random_arr = (photos.count < 12) ? (1..12).to_a.sample(12 - photos.count) : []
+    if random_arr.any?
+      random_arr.each do |index|
+        photos << "/featured/#{index}.jpg"
+      end
+    end
+    photos.sample(12)
+  end
+
   private
 
   def create_remember_token
