@@ -28,6 +28,9 @@
       <%= link_to edit_user_trip_path(current_user, @trip), class: "btn btn-default" do %>
         <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> Edit trip
       <% end %>
+      <%= link_to '#', class: "btn btn-default", data: { toggle: "modal", target: "#myModal" } do %>
+        <span class="glyphicon glyphicon-picture" aria-hidden="true"></span> Upload photo
+      <% end %>
       <%= link_to user_trip_path(current_user, @trip), method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-default" do %>
         <span class="glyphicon glyphicon-remove" aria-hidden="true"></span> Delete trip
       <% end %>
@@ -69,6 +72,31 @@
           </div>
         </div>
       </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Upload Photos</h4>
+      </div>
+      <%= form_for([@user, @trip, @trip.photos.build], html: {class: "form-inline", role: "form", multipart: true}) do |f| %>
+      <div class="modal-body">
+        <div class="form-group">
+          <%= f.file_field :original_file, class: "form-control" %>
+        </div>
+        <div class="form-group">
+          <%= f.text_field :caption, {class: "form-control", placeholder: "Caption (optional)"} %>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <%= f.submit 'Upload', {id: "photo-upload", class: "btn btn-primary"} %>
+      </div>
+      <% end %>
     </div>
   </div>
 </div>

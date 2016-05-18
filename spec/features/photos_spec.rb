@@ -7,13 +7,13 @@ RSpec.describe 'Photos', type: :feature do
 
   before do
     sign_in(user)
-    visit edit_user_trip_path(user, trip)
+    visit user_trip_path(user, trip)
   end
 
   describe 'POST /account/:user_id/trips/:trip_id/photos' do
     before do
       expect(trip.photos.count).to eq(0)
-      click_button 'Upload Photos'
+      click_link 'Upload photo'
       page.attach_file('photo_original_file', image_file)
       click_button 'Upload'
       trip.reload
@@ -28,9 +28,14 @@ RSpec.describe 'Photos', type: :feature do
       expect(photo.original_file.url).to end_with("photo/#{photo.id}/original_file.#{photo.original_file.file.extension}")
     end
 
-    it 'saves the thumbnail with the correct path' do
+    it 'saves the small version with the correct path' do
       photo = trip.photos.first
-      expect(photo.original_file.thumbnail.url).to end_with("photo/#{photo.id}/thumbnail_original_file.#{photo.original_file.file.extension}")
+      expect(photo.original_file.small.url).to end_with("photo/#{photo.id}/small_original_file.#{photo.original_file.file.extension}")
+    end
+
+    it 'saves the medium version with the correct path' do
+      photo = trip.photos.first
+      expect(photo.original_file.medium.url).to end_with("photo/#{photo.id}/medium_original_file.#{photo.original_file.file.extension}")
     end
   end
 end

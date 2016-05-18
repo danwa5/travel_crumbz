@@ -4,6 +4,37 @@ RSpec.describe 'Trips', type: :feature do
   let(:user) { create(:user, :with_trip) }
   before { sign_in(user) }
 
+  subject { page }
+
+  describe 'GET /account/:user_id/trips/:id' do
+    let(:trip) { user.trips.first }
+
+    before do
+      visit user_trip_path(user, trip)
+      expect(user.trips.count).to eq(1)
+    end
+
+    describe 'display a navigation bar' do
+      it 'must show a "My Trips" button with a link to trip' do
+        is_expected.to have_selector('button', text: 'My Trips')
+        expect(find('ul.dropdown-menu').find('li')).to have_content(/Trip #/)
+      end
+      it 'must have an "Add new trip" button' do
+        is_expected.to have_link('Add new trip', href: new_user_trip_path(user))
+      end
+      it 'must have an "Edit trip" button' do
+        is_expected.to have_link('Edit trip', edit_user_trip_path(user, trip))
+      end
+      it 'must have an "Upload Photos" button' do
+        is_expected.to have_link('Upload photo')
+        is_expected.to have_css("a[data-toggle='modal'][data-target='#myModal']")
+      end
+      it 'must have a "Delete trip" button' do
+        is_expected.to have_link('Delete trip')
+      end
+    end
+  end
+
   describe 'GET /account/:user_id/trips/new' do
     before { visit new_user_trip_path(user) }
     it 'can create new a trip' do
@@ -13,8 +44,9 @@ RSpec.describe 'Trips', type: :feature do
     xit 'can create new a trip with location', js: true do
       fill_in 'Name', with: 'Round the World'
       click_button 'Add Location'
-      fill_in 'Location 1', with: 'Sydney, Australia'
-      expect { click_button 'Add new trip' }.to change(Trip, :count).by(1)
+      fill_in 'Location', with: 'Sydney, Australia'
+      click_button 'Add new trip'
+      expect(user.trips.count).to eq(1)
     end
   end
 
@@ -30,7 +62,7 @@ RSpec.describe 'Trips', type: :feature do
       click_button 'Update Trip'
       trip.reload
       expect(trip.name).to eq('Trip 2')
-      expect(current_url).to eq(user_url(user, trip: trip.slug))
+      expect(current_path).to eq(user_trip_path(user, trip))
       # is_expected.to have_selector('div.alert.alert-success', text: 'Trip updated')
     end
     it 'must have cancel button that redirects to user show page' do
@@ -40,14 +72,15 @@ RSpec.describe 'Trips', type: :feature do
   end
 
   describe 'DELETE /account/:user_id/trips/:id' do
+    before { visit user_trip_path(user, user.trips.first) }
     it 'must delete trip' do
       expect { click_link 'Delete trip' }.to change(Trip, :count).by(-1)
       expect(user.trips.count).to eq(0)
     end
     xit 'redirects to user show page with flash message' do
-      click_link 'Delete Trip'
+      click_link 'Delete trip'
       expect(current_path).to eq(user_path(user))
-      # is_expected.to have_selector('div.alert.alert-success', text: 'Trip deleted')
+      is_expected.to have_selector('div.alert.alert-success', text: 'Trip deleted')
     end
   end
 

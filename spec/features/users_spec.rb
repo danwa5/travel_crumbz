@@ -16,7 +16,9 @@ RSpec.describe 'Users', type: :feature do
     context 'when user has no trips' do
       before { expect(user.trips.count).to eq(0) }
 
-      describe 'display a navigation bar' do
+      it { is_expected.to have_content('You have not added any trips.') }
+
+      xdescribe 'display a navigation bar' do
         it 'must show a "My Trips" button with a disabled dropdown item' do
           is_expected.to have_selector('button', text: 'My Trips')
           expect(find('ul.dropdown-menu').find('li.disabled')).to have_content('You have 0 trips')
@@ -41,7 +43,7 @@ RSpec.describe 'Users', type: :feature do
 
       before { expect(user.trips.count).to eq(1) }
 
-      describe 'display a navigation bar' do
+      xdescribe 'display a navigation bar' do
         it 'must show a "My Trips" button with a link to trip' do
           is_expected.to have_selector('button', text: 'My Trips')
           expect(find('ul.dropdown-menu').find('li')).to have_content(/Trip #/)
@@ -63,7 +65,7 @@ RSpec.describe 'Users', type: :feature do
 
       before { expect(user.trips.count).to eq(3) }
 
-      describe 'display a navigation bar' do
+      xdescribe 'display a navigation bar' do
         it 'must show a "My Trips" button with a link to trip' do
           is_expected.to have_selector('button', text: 'My Trips')
           expect(find('ul.dropdown-menu').find('li.active')).to have_content(/Trip #/)
@@ -80,7 +82,7 @@ RSpec.describe 'Users', type: :feature do
         end
       end
 
-      describe 'select a trip from the "My Trips" menu' do
+      xdescribe 'select a trip from the "My Trips" menu' do
         it 'displays the trip on the map' do
           last_trip = user.trips.most_recent.first
           expect(find('ul.dropdown-menu').find('li.active')).to have_content(last_trip.name)

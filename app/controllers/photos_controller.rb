@@ -17,7 +17,7 @@ class PhotosController < ApplicationController
   end
 
   def user
-    @user ||= User.find_by(username: params[:user_id])
+    @user ||= User.where(username: params[:user_id]).first
   end
 
   def trip

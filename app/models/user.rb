@@ -80,7 +80,7 @@ class User
         photos << "/featured/#{index}.jpg"
       end
     end
-    photos.sample(12)
+    photos.first(12)
   end
 
   private

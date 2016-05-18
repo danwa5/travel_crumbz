@@ -29,7 +29,7 @@ class TripsController < ApplicationController
   def update
     if @trip.update_attributes(trip_params)
       flash[:success] = 'Trip updated!'
-      redirect_to user_path(user, trip: @trip.slug)
+      redirect_to user_trip_path(user, @trip)
     else
       render 'edit'
     end
@@ -48,7 +48,7 @@ class TripsController < ApplicationController
   end
 
   def user
-    @user ||= User.find_by(username: params[:user_id])
+    @user ||= User.where(username: params[:user_id]).first
   end
 
   def find_trip
