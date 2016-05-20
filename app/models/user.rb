@@ -74,13 +74,13 @@ class User
       my_photos.each { |photo| photos << photo.original_file.medium.url }
     end
 
-    random_arr = (photos.count < 12) ? (1..12).to_a.sample(12 - photos.count) : []
+    random_arr = (photos.count < 16) ? (1..16).to_a.sample(16 - photos.count) : []
     if random_arr.any?
       random_arr.each do |index|
         photos << "/featured/#{index}.jpg"
       end
     end
-    photos.first(12)
+    photos.first(16)
   end
 
   private

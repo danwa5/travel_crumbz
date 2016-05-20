@@ -40,8 +40,11 @@
   <br/><br/>
 
   <div class="row">
-    <div style='width: 800px;'>
-      <div id="map"></div>
+
+    <div class="col-md-10">
+      <div class="flexible-container">
+        <div id="map"></div>
+      </div>
       <div id="trip-body">
         <div class="trip-meta">
           <div class="trip-view">
@@ -64,11 +67,11 @@
         <div class="trip-details">
           <p class="list-group"></p>
           <div class="row">
-            <div class="col-xs-6 col-md-3">
-              <% @photos.each do |photo| %>
-                <%= image_tag(photo.original_file.small.url, class: "img-responsive") %>
-              <% end %>
-            </div>
+            <% @photos.each do |photo| %>
+              <div class="col-xs-3 col-md-2">
+                <%= image_tag(photo.original_file.small.url, class: "img-responsive thumbnail") %>
+              </div>
+            <% end %>
           </div>
         </div>
       </div>
