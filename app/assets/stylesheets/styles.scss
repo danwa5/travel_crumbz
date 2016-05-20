@@ -377,10 +377,10 @@ body {
   transition: all 0.3s ease;
 }
 
-.post-view .fa,
-.post-like .fa,
-.post-comment .fa,
-.post-location .fa {
+.trip-view .fa,
+.trip-like .fa,
+.trip-comment .fa,
+.trip-location .fa {
   font-size: 20px;
   display: block;
 }
@@ -414,10 +414,6 @@ body {
   -ms-transition: all 0.3s ease;
   -o-transition: all 0.3s ease;
   transition: all 0.3s ease;
-}
-
-#accordion {
-  padding-top: 5px;
 }
 
 .input-group-addon {
@@ -477,11 +473,44 @@ body {
 }
 
 @media screen and (max-width: 640px) {
+  .content {
+    padding: 0px;
+  }
 
-}
+  .content #trip-body {
+    padding: 35px 30px;
+  }
 
-@media screen and (max-width: 620px) {
+  .content .trip-meta {
+    position: static;
+    height: auto;
+    padding: 0;
+    border: 0;
+  }
 
+  .content .trip-meta .trip-view,
+  .content .trip-meta .trip-like,
+  .content .trip-meta .trip-comment,
+  .content .trip-meta .trip-location {
+    position: relative;
+    border: 0;
+    display: inline-block;
+    padding: 0;
+    width: auto;
+    padding-right: 17px;
+  }
+
+  .trip-view .fa,
+  .trip-like .fa,
+  .trip-comment .fa,
+  .trip-location .fa,
+  .trip-view .count,
+  .trip-like .count,
+  .trip-comment .count,
+  .trip-location .count {
+    font-size: 14px;
+    display: inline-block;
+  }
 }
 
 @media screen and (max-width: 480px) {

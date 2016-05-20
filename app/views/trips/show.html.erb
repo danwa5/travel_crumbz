@@ -68,7 +68,7 @@
           <p class="list-group"></p>
           <div class="row">
             <% @photos.each do |photo| %>
-              <div class="col-xs-3 col-md-2">
+              <div class="col-xs-6 col-sm-3 col-md-2">
                 <%= image_tag(photo.original_file.small.url, class: "img-responsive thumbnail") %>
               </div>
             <% end %>
