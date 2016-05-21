@@ -44,4 +44,8 @@ class Location
   def longitude
     coordinates[0].to_s if coordinates.present?
   end
+
+  def label
+    order.to_s + '. ' + address
+  end
 end

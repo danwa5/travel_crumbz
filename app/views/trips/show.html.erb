@@ -22,7 +22,7 @@
       </ul>
     </div>
     <%= link_to new_user_trip_path(current_user), class: "btn btn-default" do %>
-      <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Add new trip
+      <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> New trip
     <% end %>
     <% if @trip %>
       <%= link_to edit_user_trip_path(current_user, @trip), class: "btn btn-default" do %>

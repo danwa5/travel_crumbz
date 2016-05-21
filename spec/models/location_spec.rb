@@ -36,6 +36,12 @@ RSpec.describe Location, type: :model do
     end
   end
 
+  describe '#label' do
+    it 'returns the order and address' do
+      expect(subject.label).to eq(subject.order.to_s + '. ' + subject.address)
+    end
+  end
+
   def make_google_maps_stub_request
     stub_request(:get, /maps.googleapis.com\/maps\/api\/geocode\/.+/).
       with(:headers => {'Accept'=>'*/*', 'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3', 'User-Agent'=>'Ruby'}).

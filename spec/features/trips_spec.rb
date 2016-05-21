@@ -19,8 +19,8 @@ RSpec.describe 'Trips', type: :feature do
         is_expected.to have_selector('button', text: 'My Trips')
         expect(find('ul.dropdown-menu').find('li')).to have_content(/Trip #/)
       end
-      it 'must have an "Add new trip" button' do
-        is_expected.to have_link('Add new trip', href: new_user_trip_path(user))
+      it 'must have an "New trip" button' do
+        is_expected.to have_link('New trip', href: new_user_trip_path(user))
       end
       it 'must have an "Edit trip" button' do
         is_expected.to have_link('Edit trip', edit_user_trip_path(user, trip))
@@ -67,7 +67,7 @@ RSpec.describe 'Trips', type: :feature do
     end
     it 'must have cancel button that redirects to user show page' do
       click_on 'Cancel'
-      expect(current_path).to eq(user_path(user))
+      expect(current_path).to eq(user_trip_path(user, trip))
     end
   end
 
