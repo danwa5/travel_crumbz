@@ -2,13 +2,12 @@ require 'rails_helper'
 
 RSpec.describe 'Trips', type: :feature do
   let(:user) { create(:user, :with_trip) }
+  let(:trip) { user.trips.first }
   before { sign_in(user) }
 
   subject { page }
 
   describe 'GET /account/:user_id/trips/:id' do
-    let(:trip) { user.trips.first }
-
     before do
       visit user_trip_path(user, trip)
       expect(user.trips.count).to eq(1)
@@ -37,7 +36,7 @@ RSpec.describe 'Trips', type: :feature do
 
   describe 'GET /account/:user_id/trips/new' do
     before { visit new_user_trip_path(user) }
-    it 'can create new a trip' do
+    it 'can create new a trip without a location' do
       fill_in 'Name', with: 'Round the World'
       expect { click_button 'Add new trip' }.to change(Trip, :count).by(1)
     end
@@ -63,7 +62,7 @@ RSpec.describe 'Trips', type: :feature do
       trip.reload
       expect(trip.name).to eq('Trip 2')
       expect(current_path).to eq(user_trip_path(user, trip))
-      # is_expected.to have_selector('div.alert.alert-success', text: 'Trip updated')
+      is_expected.to have_selector('div.alert.alert-success', text: 'Trip updated')
     end
     it 'must have cancel button that redirects to user show page' do
       click_on 'Cancel'
@@ -72,15 +71,24 @@ RSpec.describe 'Trips', type: :feature do
   end
 
   describe 'DELETE /account/:user_id/trips/:id' do
-    before { visit user_trip_path(user, user.trips.first) }
+    before { visit user_trip_path(user, trip) }
     it 'must delete trip' do
       expect { click_link 'Delete trip' }.to change(Trip, :count).by(-1)
       expect(user.trips.count).to eq(0)
     end
-    xit 'redirects to user show page with flash message' do
+    it 'redirects to user show page with flash message' do
       click_link 'Delete trip'
       expect(current_path).to eq(user_path(user))
       is_expected.to have_selector('div.alert.alert-success', text: 'Trip deleted')
+    end
+  end
+
+  describe 'POST /account/:user_id/trips/:id/like' do
+    before { visit user_trip_path(user, trip) }
+    it 'increments likes count by 1' do
+      first('.trip-like > a').click
+      trip.reload
+      expect(trip.likes).to eq(1)
     end
   end
 

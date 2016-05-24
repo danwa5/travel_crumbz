@@ -397,12 +397,27 @@ body {
   transition: all 0.3s ease;
 }
 
+#trip-body .trip-meta .trip-view:hover ,
+#trip-body .trip-meta .trip-like:hover,
+#trip-body .trip-meta .trip-comment:hover,
+#trip-body .trip-meta .trip-location:hover {
+  color: #1abc9c;
+}
+
 .trip-view .fa,
 .trip-like .fa,
 .trip-comment .fa,
 .trip-location .fa {
   font-size: 20px;
   display: block;
+}
+
+.trip-like a {
+  color: #676767;
+}
+
+.trip-like a:hover {
+  color: #1abc9c;
 }
 
 .list-group .label {

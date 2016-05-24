@@ -55,8 +55,10 @@
             <span class="count">123</span>
           </div>
           <div class="trip-like">
-            <div class="fa"><span class="glyphicon glyphicon-heart" aria-hidden="true"></span></div>
-            <span class="count">123</span>
+            <%= link_to like_user_trip_path(@current_user, @trip), method: :post do %>
+              <div class="fa"><span class="glyphicon glyphicon-heart" aria-hidden="true"></span></div>
+              <span class="count"><%= @trip.likes %></span>
+            <% end %>
           </div>
           <div class="trip-comment">
             <div class="fa"><span class="glyphicon glyphicon-comment" aria-hidden="true"></span></div>
@@ -64,7 +66,7 @@
           </div>
           <div class="trip-location">
             <div class="fa"><span class="glyphicon glyphicon-pushpin" aria-hidden="true"></span></div>
-            <span class="count">123</span>
+            <span class="count"><%= @trip.locations.count %></span>
           </div>
         </div>
         <div class="trip-details">

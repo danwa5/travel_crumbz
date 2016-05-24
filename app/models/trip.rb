@@ -10,6 +10,7 @@ class Trip
   accepts_nested_attributes_for :locations, :allow_destroy => true
 
   field :name, type: String
+  field :likes, type: Integer, default: 0
   slug :name
 
   validates :name, presence: true, uniqueness: { case_sensitive: false, scope: :user_ids }

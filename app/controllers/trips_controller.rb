@@ -1,5 +1,5 @@
 class TripsController < ApplicationController
-  before_action :find_trip, only: [:show, :edit, :update, :destroy]
+  before_action :find_trip, only: [:show, :edit, :update, :destroy, :like]
 
   def show
     @photos = @trip.try(:photos)
@@ -39,6 +39,12 @@ class TripsController < ApplicationController
     @trip.destroy
     flash[:success] = 'Trip deleted!'
     redirect_to @user
+  end
+
+  def like
+    @trip.likes += 1
+    @trip.save
+    redirect_to user_trip_path(user, @trip)
   end
 
   private

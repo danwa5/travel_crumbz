@@ -4,6 +4,7 @@ Rails.application.routes.draw do
       get :confirm_email
     end
     resources :trips, except: [:index] do
+      post :like, on: :member
       resources :photos, only: [:create]
     end
   end

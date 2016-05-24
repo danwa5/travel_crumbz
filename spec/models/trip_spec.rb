@@ -17,6 +17,7 @@ RSpec.describe Trip, type: :model do
 
   describe 'fields' do
     it { is_expected.to have_fields(:name) }
+    it { is_expected.to have_fields(:likes) }
     it { is_expected.to be_timestamped_document }
   end
 
