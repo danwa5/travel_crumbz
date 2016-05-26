@@ -3,45 +3,44 @@
 <script src='//cdn.rawgit.com/printercu/google-maps-utility-library-v3-read-only/master/infobox/src/infobox_packed.js' type='text/javascript'></script> <!-- only if you need custom infoboxes -->
 
 <div class="content">
-  <div class="btn-group" role="group" aria-label="...">
-    <div class="btn-group" role="group">
-      <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-        <span class="glyphicon glyphicon-plane" aria-hidden="true"></span> My Trips
-        <span class="caret"></span>
-      </button>
-      <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-        <% if @trip %>
-          <% current_user.trips.each do |t| %>
-            <li<%= t == @trip && current_user.trips.count > 1 ? ' class=active' : '' %>>
-              <%= link_to t.name, user_trip_path(current_user, t) %>
-            </li>
-          <% end %>
-        <% else %>
-          <li class="disabled"><a>You have 0 trips</a></li>
-        <% end %>
-      </ul>
-    </div>
-    <%= link_to new_user_trip_path(current_user), class: "btn btn-default" do %>
-      <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> New trip
-    <% end %>
-    <% if @trip %>
-      <%= link_to edit_user_trip_path(current_user, @trip), class: "btn btn-default" do %>
-        <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> Edit trip
-      <% end %>
-      <%= link_to '#', class: "btn btn-default", data: { toggle: "modal", target: "#myModal" } do %>
-        <span class="glyphicon glyphicon-picture" aria-hidden="true"></span> Upload photo
-      <% end %>
-      <%= link_to user_trip_path(current_user, @trip), method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-default" do %>
-        <span class="glyphicon glyphicon-remove" aria-hidden="true"></span> Delete trip
-      <% end %>
-    <% end %>
-  </div>
-
-  <br/><br/>
-
   <div class="row">
-
     <div class="col-md-10">
+      <div id="trip-button-panel" class="btn-group" role="group" aria-label="map button panel">
+        <%= link_to user_path(current_user), class: "btn btn-default", role: "button" do %>
+          <i class="fa fa-home"></i>
+        <% end %>
+        <div class="btn-group" role="group">
+          <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+            My Trips <span class="caret"></span>
+          </button>
+          <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+            <% if @trip %>
+              <% current_user.trips.each do |t| %>
+                <li<%= t == @trip && current_user.trips.count > 1 ? ' class=active' : '' %>>
+                  <%= link_to t.name, user_trip_path(current_user, t) %>
+                </li>
+              <% end %>
+            <% else %>
+              <li class="disabled"><a>You have 0 trips</a></li>
+            <% end %>
+          </ul>
+        </div>
+        <%= link_to new_user_trip_path(current_user), class: "btn btn-default" do %>
+          <i class="fa fa-plus"></i> New trip
+        <% end %>
+        <% if @trip %>
+          <%= link_to edit_user_trip_path(current_user, @trip), class: "btn btn-default" do %>
+            <i class="fa fa-edit"></i> Edit trip
+          <% end %>
+          <%= link_to '#', class: "btn btn-default", data: { toggle: "modal", target: "#myModal" } do %>
+            <i class="fa fa-photo"></i> Upload photo
+          <% end %>
+          <%= link_to user_trip_path(current_user, @trip), method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-default" do %>
+            <i class="fa fa-remove"></i> Delete trip
+          <% end %>
+        <% end %>
+      </div>
+
       <div class="flexible-container">
         <div id="map"></div>
       </div>
@@ -51,21 +50,21 @@
         </div>
         <div class="trip-meta">
           <div class="trip-view">
-            <div class="fa"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></div>
+            <i class="fa fa-eye"></i>
             <span class="count">123</span>
           </div>
           <div class="trip-like">
             <%= link_to like_user_trip_path(@current_user, @trip), method: :post do %>
-              <div class="fa"><span class="glyphicon glyphicon-heart" aria-hidden="true"></span></div>
+              <i class="fa fa-heart-o"></i>
               <span class="count"><%= @trip.likes %></span>
             <% end %>
           </div>
           <div class="trip-comment">
-            <div class="fa"><span class="glyphicon glyphicon-comment" aria-hidden="true"></span></div>
+            <i class="fa fa-comment-o"></i>
             <span class="count">123</span>
           </div>
           <div class="trip-location">
-            <div class="fa"><span class="glyphicon glyphicon-pushpin" aria-hidden="true"></span></div>
+            <i class="fa fa-map-marker"></i>
             <span class="count"><%= @trip.locations.count %></span>
           </div>
         </div>

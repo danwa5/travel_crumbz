@@ -16,6 +16,7 @@ gem 'sass-rails', '~> 5.0', '>= 5.0.4'
 gem 'turbolinks'
 gem 'uglifier', '>= 1.3.0'
 gem 'underscore-rails', '~> 1.8', '>= 1.8.3'
+gem 'font-awesome-sass'
 
 gem 'bcrypt', '~> 3.1.7'
 gem 'figaro'
