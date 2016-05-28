@@ -36,6 +36,15 @@ RSpec.describe Trip, type: :model do
     end
   end
 
+  describe '#users_str' do
+    let(:user_1) { create(:user, username: 'sara') }
+    let(:user_2) { create(:user, username: 'samo') }
+    let(:trip) { create(:trip, user_ids: [user_1.id, user_2.id]) }
+    it 'returns a comma-delimited string of users full names' do
+      expect(trip.users_str).to eq('sara, samoo')
+    end
+  end
+
   describe '#created_at / #updated_at' do
     it { expect(subject.created_at).to be_present }
     it { expect(subject.updated_at).to be_present }

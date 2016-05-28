@@ -17,4 +17,20 @@ class Trip
   validates :user_ids, presence: true
 
   scope :most_recent, -> { order_by(created_at: :desc) }
+
+  def users_str
+    users.map { |u| u.username }.join(', ')
+  end
+
+  def locations_str
+    locations.map { |loc| loc.address }.join(' &raquo; ').html_safe
+  end
+
+  def cover
+    if photos.any?
+      photos.first.original_file.medium.url
+    else
+      "/featured/#{rand(1..16)}.jpg"
+    end
+  end
 end
