@@ -26,11 +26,11 @@ class Trip
     locations.map { |loc| loc.address }.join(' &raquo; ').html_safe
   end
 
-  def cover
-    if photos.any?
-      photos.first.original_file.medium.url
+  def cover(large=false)
+    if large == true
+      photos.any? ? photos.first.original_file.url : "/featured/#{rand(1..16)}_large.jpg"
     else
-      "/featured/#{rand(1..16)}.jpg"
+      photos.any? ? photos.first.original_file.medium.url : "/featured/#{rand(1..16)}.jpg"
     end
   end
 end

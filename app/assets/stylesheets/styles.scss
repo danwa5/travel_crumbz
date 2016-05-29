@@ -84,8 +84,6 @@ body {
 }
 
 img {
-  max-width: 100%;
-  height: auto;
   vertical-align: middle;
   border: 3;
 }
@@ -181,16 +179,59 @@ img {
 }
 
 .post {
+  width: 33%;
+  padding-left: 15px;
+  padding-right: 15px;
   margin-bottom: 30px;
   float: left;
+}
+
+.post:first-child {
+  width: 66%;
 }
 
 .post .post-media {
   position: relative;
 }
 
-.post .post-media .image-wrap img {
-  height: 100%;
+.post:first-child .sticky-icon {
+  position: absolute;
+  display: inline-block;
+  font-size: 14px;
+  color: #fff;
+  top: -5px;
+  right: 10px;
+  z-index: 9;
+}
+
+.post:first-child .sticky-icon .fa {
+  width: 26px;
+  height: 30px;
+  line-height: 30px;
+  text-align: center;
+  background-color: #1abc9c;
+}
+
+.post:first-child .sticky-icon:after {
+  content: '';
+  display: block;
+  position: absolute;
+  width: 0;
+  height: 0;
+  border: 13px solid #1abc9c;
+  border-bottom-color: transparent;
+  z-index: -1;
+  left: 0;
+  bottom: -14px;
+}
+
+.post:first-child .post-media .image-wrap img {
+  width: 100%;
+  height: 60%;
+}
+
+.post:not(:first-child) .post-media .image-wrap img {
+  width: 100%;
   max-height: 220px;
 }
 
@@ -249,8 +290,6 @@ img {
   transform: perspective(100em) rotateX(0deg) translateY(-100%);
 }
 
-.post .post-meta:after,
-.post .post-meta:after,
 .post .post-meta:after {
   content: '';
   display: block;
@@ -266,7 +305,8 @@ img {
 
 .post .post-meta .post-view,
 .post .post-meta .post-like,
-.post .post-meta .post-comment {
+.post .post-meta .post-comment,
+.post .post-meta .post-location {
   display: inline-block;
   color: #fff;
   text-align: center;
@@ -281,16 +321,25 @@ img {
   transition: all 0.3s ease;
 }
 
+.post:first-child .post-meta .post-view,
+.post:first-child .post-meta .post-like,
+.post:first-child .post-meta .post-comment,
+.post:first-child .post-meta .post-location {
+  width: 25%;
+}
+
 .post .post-meta .post-view .fa,
 .post .post-meta .post-like .fa,
-.post .post-meta .post-comment .fa {
+.post .post-meta .post-comment .fa,
+.post:first-child .post-meta .post-location .fa {
   font-size: 20px;
   display: block;
 }
 
 .post .post-meta .post-view .count,
 .post .post-meta .post-like .count,
-.post .post-meta .post-comment .count {
+.post .post-meta .post-comment .count,
+.post:first-child .post-meta .post-location .count {
   display: block;
   color: inherit;
   font-family: "Droid Serif", serif;
@@ -638,7 +687,18 @@ img {
   }
 }
 
+@media screen and (max-width: 991px) {
+  .post {
+    width: 50%;
+  }
+
+  .post:first-child {
+    width: 100%
+  }
+}
+
 @media screen and (max-width: 720px) {
+
   .blog-heading {
     padding: 100px 0;
   }
@@ -658,6 +718,11 @@ img {
 @media screen and (max-width: 640px) {
   .content {
     padding: 0px;
+  }
+
+  .post {
+    padding-left: 5px;
+    padding-right: 5px;
   }
 
   #trip-body {
@@ -697,6 +762,13 @@ img {
 }
 
 @media screen and (max-width: 480px) {
+
+  .post {
+    width: 100%;
+    padding-left: 0px;
+    padding-right: 0px;
+  }
+
   .blog-heading {
     padding: 50px 0;
   }

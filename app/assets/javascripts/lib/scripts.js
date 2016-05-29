@@ -381,7 +381,7 @@
         }
     }
 
-    function Pimasonry() {
+    function piMasonry() {
         if ($('.pi-masonry').length > 0) {
             setTimeout(function() {
                 $('.pi-masonry').masonry({
@@ -469,7 +469,7 @@
         // $('.image-cover').imageCover();
         // $('.widget_slider .image-wrap').imageCover();
         // $('.blog-list .post .image-wrap').imageCover();
-        // Pimasonry();
+        piMasonry();
     });
     $(window).scroll(function() {
         headerSticky();

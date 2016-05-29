@@ -1,17 +1,18 @@
 <% provide(:title, 'Home') %>
 
-<div class="col-sm-12 blog-main">
-  <div class="jumbotron">
-    <h1>Hello, world!</h1>
-    <p>This is an example to show the potential of an offcanvas layout pattern in Bootstrap. Try some responsive-range viewport sizes to see it in action.</p>
-  </div>
-  <div class="row">
-    <% @trips.each do |trip| %>
-      <div class="col-xs-12 col-sm-6 col-md-4">
+<div class="col-sm-12">
+  <div class="pi-masonry">
+
+    <% @trips.each_with_index do |trip, index| %>
         <div class="post">
           <div class="post-media">
+          <% if index == 0 %>
+            <div class="sticky-icon">
+              <i class="fa fa-thumb-tack"></i>
+            </div>
+          <% end %>
             <div class="image-wrap">
-              <%= image_tag(trip.cover) %>
+              <%= index == 0 ? image_tag(trip.cover(true)) : image_tag(trip.cover(false)) %>
             </div>
           </div>
           <div class="post-body">
@@ -21,7 +22,7 @@
             <div class="post-meta">
               <div class="post-view">
                 <i class="fa fa-eye"></i>
-                <span class="count">1235</span>
+                <span class="count">n/a</span>
               </div>
               <div class="post-like">
                 <i class="fa fa-heart-o"></i>
@@ -29,8 +30,14 @@
               </div>
               <div class="post-comment">
                 <i class="fa fa-comment-o"></i>
-                <span class="count">50</span>
+                <span class="count">n/a</span>
               </div>
+            <% if index == 0 %>
+              <div class="post-location">
+                <i class="fa fa-map-marker"></i>
+                <span class="count"><%= trip.locations.count %></span>
+              </div>
+            <% end %>
             </div>
             <div class="post-date">
               <span>March . 8 . 2015</span>
@@ -44,7 +51,7 @@
             </div>
           </div>
         </div>
-      </div>
-    <% end %>
+     <% end %>
+
   </div>
 </div>
