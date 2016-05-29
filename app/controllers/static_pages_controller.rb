@@ -1,6 +1,6 @@
 class StaticPagesController < ApplicationController
 
-  def home
+  def discover
     @trips = Trip.all
   end
   

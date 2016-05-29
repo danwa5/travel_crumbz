@@ -1,4 +1,4 @@
-<% provide(:title, 'Home') %>
+<% provide(:title, 'Discover') %>
 
 <div class="col-sm-12">
   <div class="pi-masonry">
@@ -42,9 +42,9 @@
             <div class="post-date">
               <span>March . 8 . 2015</span>
             </div>
-            <h6><%= trip.users_str %></h6>
+            <h6><%= trip.users_list %></h6>
             <div class="post-entry">
-              <p><%= trip.locations_str %></p>
+              <p><%= trip.locations_list.to_s.html_safe %></p>
             </div>
             <div class="post-link">
               <%= link_to 'View details &raquo;'.html_safe, user_trip_path(trip.users.first, trip), class: "btn btn-default", role: "button"%>

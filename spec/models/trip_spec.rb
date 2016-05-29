@@ -18,6 +18,7 @@ RSpec.describe Trip, type: :model do
   describe 'fields' do
     it { is_expected.to have_fields(:name) }
     it { is_expected.to have_fields(:likes) }
+    it { is_expected.to have_fields(:locations_list) }
     it { is_expected.to be_timestamped_document }
   end
 
@@ -36,12 +37,25 @@ RSpec.describe Trip, type: :model do
     end
   end
 
-  describe '#users_str' do
+  describe '#users_list' do
     let(:user_1) { create(:user, username: 'sara') }
     let(:user_2) { create(:user, username: 'samo') }
     let(:trip) { create(:trip, user_ids: [user_1.id, user_2.id]) }
     it 'returns a comma-delimited string of users full names' do
-      expect(trip.users_str).to eq('sara, samoo')
+      expect(trip.users_list).to eq('sara, samo')
+    end
+  end
+
+  describe '#cover' do
+    context 'argument is false' do
+      it 'returns the smaller version of a generic image' do
+        expect(subject.cover(false)).to match(/\/featured\/\d+\.jpg/)
+      end
+    end
+    context 'argument is true' do
+      it 'returns the larger version of a generic image' do
+        expect(subject.cover(true)).to match(/\/featured\/\d+_large\.jpg/)
+      end
     end
   end
 
