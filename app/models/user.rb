@@ -30,7 +30,7 @@ class User
   validates :email, presence: true,
                     uniqueness: { case_sensitive: false },
                     format: { with: VALID_EMAIL_REGEX }
-  validates :password, length: { maximum: 72 }
+  validates :password, length: { minimum: 6, maximum: 20 }
 
   before_save do
     self.username = username.downcase

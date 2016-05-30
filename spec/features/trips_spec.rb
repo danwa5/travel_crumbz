@@ -16,7 +16,9 @@ RSpec.describe 'Trips', type: :feature do
     describe 'display a navigation bar' do
       it 'must show a "My Trips" button with a link to trip' do
         is_expected.to have_selector('button', text: 'My Trips')
-        expect(find('ul.dropdown-menu').find('li')).to have_content(/Trip #/)
+        within('#trip-button-panel') do
+          expect(find('ul.dropdown-menu').find('li')).to have_content(/Trip #/)
+        end
       end
       it 'must have an "New trip" button' do
         is_expected.to have_link('New trip', href: new_user_trip_path(user))
