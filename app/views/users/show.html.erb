@@ -1,30 +1,40 @@
 <% provide(:title, @current_user.full_name) %>
 
-<div class="blog-post">
+<div class="col-md-12">
   <div class="page-header">
-    <h2><%= @current_user.full_name %></h2>
+    <h2>My Trips</h2>
   </div>
 
-  <table class="table table-hover">
-    <thead>
-      <tr><th>#</th><th>Trip Name</th><th>Photos</th><th>Created</th><th>Updated</th></tr>
-    </thead>
-  <% if @trips.any? %>
-    <tbody>
-    <% @trips.each_with_index do |trip, index| %>
-      <tr>
-        <th scope="row"><%= index + 1 %></th>
-        <td><%= link_to trip.name, user_trip_path(@current_user, trip) %></td>
-        <td><%= trip.photos.count %></td>
-        <td><%= trip.created_at %></td>
-        <td><%= trip.updated_at %></td>
-      </tr>
+  <div class="table-responsive">
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Trip Name</th>
+          <th><center>Locations</center></th>
+          <th><center>Photos</center></th>
+          <th><center>Created</center></th>
+          <th><center>Updated</center></th>
+        </tr>
+      </thead>
+    <% if @trips.any? %>
+      <tbody>
+      <% @trips.each_with_index do |trip, index| %>
+        <tr>
+          <th scope="row"><%= index + 1 %></th>
+          <td><%= link_to trip.name, user_trip_path(@current_user, trip) %></td>
+          <td><center><%= trip.locations.count %></center></td>
+          <td><center><%= trip.photos.count %></center></td>
+          <td><center><%= trip.created_at %></center></td>
+          <td><center><%= trip.updated_at %></center></td>
+        </tr>
+      <% end %>
+      </tbody>
+    <% else %>
+      <tbody>
+        <tr class="warning"><th colspan="5" height="75px"><center>You have not added any trips.</center></th></tr>
+      </tbody>
     <% end %>
-    </tbody>
-  <% else %>
-    <tbody>
-      <tr class="warning"><th colspan="5" height="75px"><center>You have not added any trips.</center></th></tr>
-    </tbody>
-  <% end %>
-  </table>
+    </table>
+  </div>
 </div>

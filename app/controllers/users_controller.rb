@@ -4,11 +4,6 @@ class UsersController < ApplicationController
 
   def show
     @trips = @user.trips
-    @photos = current_trip.try(:photos)
-
-    if current_trip && current_trip.locations.any?
-      @location_hash = GoogleMaps::MappingService.call(current_trip.locations)
-    end
   end
 
   def new
@@ -55,9 +50,5 @@ class UsersController < ApplicationController
         redirect_to(signin_path)
       end
     end
-  end
-
-  def current_trip
-    @current_trip = (current_user.trips.find_by(_slugs: params[:trip]) if params[:trip].present?) || @trips.most_recent.first
   end
 end
