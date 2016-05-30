@@ -45,18 +45,20 @@
         <div class="tb">
           <div class="tb-cell">
             <div class="text-content">
-              <h2>Where do you want to travel?</h2>
-              <p>Search through our thousands of locations!</p>
+              <h2>Discover all the amazing places in the world</h2>
+              <p>Search through our thousands of trips!</p>
             </div>
           </div>
           <div class="tb-cell">
             <div class="search-box">
+              <%= form_tag(discover_path, method: "get", id: "search-form") do %>
               <div class="input-group">
-                <input type="text" class="form-control" placeholder="Places, locations, attractions">
+                <%= text_field_tag :keywords, nil, class: "form-control", maxlength: 100, placeholder:"Places, locations, attractions" %>
                 <span class="input-group-btn">
-                  <button class="btn btn-primary" type="button">SEARCH</button>
+                  <%= submit_tag "SEARCH", class: "btn btn-primary" %>
                 </span>
               </div>
+              <% end %>
             </div>
           </div>
         </div>

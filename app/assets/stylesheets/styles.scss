@@ -231,8 +231,8 @@ img {
 }
 
 .post:not(:first-child) .post-media .image-wrap img {
-  width: 100%;
-  max-height: 220px;
+  max-width: 100%;
+  height: auto;
 }
 
 .post .post-body {
