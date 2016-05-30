@@ -29,7 +29,7 @@ class Trip
     if large == true
       photos.any? ? photos.first.original_file.url : "/featured/#{rand(1..16)}_large.jpg"
     else
-      photos.any? ? photos.first.original_file.medium.url : "/featured/#{rand(1..16)}.jpg"
+      photos.any? ? photos.first.original_file.scaled.url : "/featured/#{rand(1..16)}.jpg"
     end
   end
 

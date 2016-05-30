@@ -20,9 +20,9 @@
               <h2><%= trip.name %></h2>
             </div>
             <div class="post-meta">
-              <div class="post-view">
-                <i class="fa fa-eye"></i>
-                <span class="count">n/a</span>
+              <div class="post-location">
+                <i class="fa fa-map-marker"></i>
+                <span class="count"><%= trip.locations.count %></span>
               </div>
               <div class="post-like">
                 <i class="fa fa-heart-o"></i>
@@ -33,9 +33,9 @@
                 <span class="count">n/a</span>
               </div>
             <% if index == 0 %>
-              <div class="post-location">
-                <i class="fa fa-map-marker"></i>
-                <span class="count"><%= trip.locations.count %></span>
+              <div class="post-view">
+                <i class="fa fa-eye"></i>
+                <span class="count">n/a</span>
               </div>
             <% end %>
             </div>
