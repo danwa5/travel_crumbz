@@ -1,48 +1,46 @@
 <% provide(:title, 'Edit Trip') %>
 
-<div class="blog-post">
-  <div class="page-header">
-    <h2>Edit Trip</h2>
-  </div>
+<div class="col-md-9 col-md-offset-1">
+  <div class="content">
+    <div class="page-header">
+      <h2>Edit Trip</h2>
+    </div>
 
-  <div class="row">
-    <div class="col-md-11">
-      <%= form_for([@user, @trip], html: { class:"form-horizontal edit-trip" }) do |f| %>
-        <%= render 'shared/error_messages', object: f.object %>
+    <%= form_for([@user, @trip], html: { class:"form-horizontal edit-trip" }) do |f| %>
+      <%= render 'shared/error_messages', object: f.object %>
 
+      <div class="form-group">
+        <%= f.label :name, nil, class: "col-sm-3 control-label" %>
+        <div class="col-sm-8">
+          <%= f.text_field :name, class: "form-control" %>
+        </div>
+      </div>
+
+      <div id="locations">
+      <% counter = 0 %>
+      <%= f.fields_for :locations do |location| %>
+        <% counter += 1 %>
         <div class="form-group">
-          <%= f.label :name, nil, class: "col-sm-3 control-label" %>
+          <%= location.label :address, "Location", class: "col-sm-3 control-label" %>
           <div class="col-sm-8">
-            <%= f.text_field :name, class: "form-control" %>
-          </div>
-        </div>
-
-        <div id="locations">
-        <% counter = 0 %>
-        <%= f.fields_for :locations do |location| %>
-          <% counter += 1 %>
-          <div class="form-group">
-            <%= location.label :address, "Location", class: "col-sm-3 control-label" %>
-            <div class="col-sm-8">
-              <div class="input-group">
-                <span class="input-group-addon">
-                  <%= location.text_field :order, size: 4, class: "location-order", data: { toggle: 'tooltip', placement: 'top' }, title: 'Select and edit the order of location in the trip' %>
-                </span>
-                <%= location.text_field :address, {class: "form-control"} %>
-              </div>
+            <div class="input-group">
+              <span class="input-group-addon">
+                <%= location.text_field :order, size: 4, class: "location-order", data: { toggle: 'tooltip', placement: 'top' }, title: 'Select and edit the order of location in the trip' %>
+              </span>
+              <%= location.text_field :address, {class: "form-control"} %>
             </div>
-          </div>
-        <% end %>
-        </div>
-
-        <div class="form-group">
-          <div class="col-sm-7 col-sm-offset-3">
-            <%= f.submit "Update Trip", class: "btn btn-large btn-primary" %>
-            <button type="button" id="add-location-button" class="btn btn-info">Add Location</button>
-            <%= link_to "Cancel", user_trip_path(@user, @trip), class: "btn btn-default" %>
           </div>
         </div>
       <% end %>
-    </div>
+      </div>
+
+      <div class="form-group">
+        <div class="col-sm-7 col-sm-offset-3">
+          <%= f.submit "Update Trip", class: "btn btn-large btn-primary" %>
+          <button type="button" id="add-location-button" class="btn btn-info">Add Location</button>
+          <%= link_to "Cancel", user_trip_path(@user, @trip), class: "btn btn-default" %>
+        </div>
+      </div>
+    <% end %>
   </div>
 </div>
