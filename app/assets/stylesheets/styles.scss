@@ -309,6 +309,7 @@ img {
 
 .post .post-meta .post-view,
 .post .post-meta .post-like,
+.post .post-meta .post-photo,
 .post .post-meta .post-comment,
 .post .post-meta .post-location {
   display: inline-block;
@@ -327,6 +328,7 @@ img {
 
 .post:first-child .post-meta .post-view,
 .post:first-child .post-meta .post-like,
+.post:first-child .post-meta .post-photo,
 .post:first-child .post-meta .post-comment,
 .post:first-child .post-meta .post-location {
   width: 25%;
@@ -334,6 +336,7 @@ img {
 
 .post .post-meta .post-location .fa,
 .post .post-meta .post-like .fa,
+.post .post-meta .post-photo .fa,
 .post .post-meta .post-comment .fa,
 .post:first-child .post-meta .post-view .fa {
   font-size: 20px;
@@ -342,6 +345,7 @@ img {
 
 .post .post-meta .post-view .count,
 .post .post-meta .post-like .count,
+.post .post-meta .post-photo .count,
 .post .post-meta .post-comment .count,
 .post:first-child .post-meta .post-location .count {
   display: block;

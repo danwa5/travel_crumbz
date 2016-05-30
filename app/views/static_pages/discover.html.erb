@@ -28,9 +28,9 @@
                 <i class="fa fa-heart-o"></i>
                 <span class="count"><%= trip.likes %></span>
               </div>
-              <div class="post-comment">
-                <i class="fa fa-comment-o"></i>
-                <span class="count">n/a</span>
+              <div class="post-photo">
+                <i class="fa fa-photo"></i>
+                <span class="count"><%= trip.photos.count %></span>
               </div>
             <% if index == 0 %>
               <div class="post-view">
@@ -46,9 +46,11 @@
             <div class="post-entry">
               <p><%= trip.locations_list.to_s.html_safe %></p>
             </div>
-            <div class="post-link">
-              <%= link_to 'View details &raquo;'.html_safe, user_trip_path(trip.users.first, trip), class: "btn btn-default", role: "button"%>
-            </div>
+            <% if signed_in? %>
+              <div class="post-link">
+                <%= link_to 'View details &raquo;'.html_safe, user_trip_path(trip.users.first, trip), class: "btn btn-default", role: "button"%>
+              </div>
+            <% end %>
           </div>
         </div>
      <% end %>
