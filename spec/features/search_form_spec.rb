@@ -15,15 +15,20 @@ RSpec.describe 'SearchForm', type: :feature do
   describe 'GET /discover' do
     let(:location_1) { build(:location, city: 'Copenhagen', country: 'Denmark') }
     let(:location_2) { build(:location, city: 'Byron Bay', country: 'Australia') }
-    let!(:trip_1) { create(:trip, :with_user, name: 'Scandinavia', locations: [location_1]) }
-    let!(:trip_2) { create(:trip, :with_user, name: 'Beaches', locations: [location_2]) }
+
+    before do
+      create(:trip, :with_user, name: 'Scandinavia', locations: [location_1])
+      create(:trip, :with_user, name: 'Beaches', locations: [location_2])
+      create(:trip, :with_user, name: 'Europe', locations: [location_1])
+    end
 
     it 'must return all trips that contain search phrase' do
       find('#keywords').set('copenhagen')
       click_button 'SEARCH'
       expect(current_path).to eq(discover_path)
-      expect(page).to have_text('Scandinavia')
-      expect(page).not_to have_text('Australia')
+      expect(page).to have_selector('div.post-title h2', text: 'Scandinavia')
+      expect(page).to have_selector('div.post-title h2', text: 'Europe')
+      expect(page).not_to have_selector('div.post-title h2', text: 'Australia')
     end
   end
 
