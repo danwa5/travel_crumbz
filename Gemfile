@@ -12,6 +12,7 @@ gem 'mongoid'
 
 gem 'bootstrap-sass', '~> 3.3.6'
 gem 'jquery-rails', '~> 4.1', '>= 4.1.1'
+gem 'jquery-ui-rails', '~> 5.0', '>= 5.0.5'
 gem 'sass-rails', '~> 5.0', '>= 5.0.4'
 gem 'turbolinks'
 gem 'uglifier', '>= 1.3.0'

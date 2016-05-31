@@ -12,6 +12,8 @@ class Trip
   accepts_nested_attributes_for :locations, :allow_destroy => true
 
   field :name, type: String
+  field :start_date, type: Date
+  field :end_date, type: Date
   field :likes, type: Integer, default: 0
   field :locations_list, type: String
   slug :name
@@ -20,6 +22,14 @@ class Trip
   validates :user_ids, presence: true
 
   scope :most_recent, -> { order_by(created_at: :desc) }
+
+  def dates
+    if start_date.present? && end_date.present?
+      "#{start_date} to #{end_date}"
+    else
+      start_date.to_s
+    end
+  end
 
   def users_list
     users.map { |u| u.username }.join(', ')

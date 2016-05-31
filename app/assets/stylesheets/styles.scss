@@ -1,4 +1,11 @@
 
+/*  JQuery UI Overrides
+----------------------------------------------------------*/
+
+#ui-datepicker-div {
+  z-index: 3 !important;
+}
+
 /*  Common
 ----------------------------------------------------------*/
 
@@ -568,6 +575,13 @@ img {
   margin-bottom: 13px;
 }
 
+.trip-date {
+  font-family: "Droid Serif", serif;
+  font-size: 14px;
+  color: #7f7f7f;
+  margin-bottom: 12px;
+}
+
 .trip-title h2 {
   margin-top: 0;
   font-size: 32px;
@@ -672,6 +686,10 @@ img {
 .thumbnail {
   display: inline-block;
   margin-right: 8px;
+}
+
+#trip_end_date {
+  margin-left: 10px;
 }
 
 /*  Authentication

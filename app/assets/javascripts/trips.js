@@ -49,4 +49,10 @@ $(document).ready(function() {
       return false;
     }
   });
+
+  // enable datepicker
+  $(function() {
+    $( "#trip_start_date" ).datepicker({ dateFormat: 'yy-mm-dd' });
+    $( "#trip_end_date" ).datepicker({ dateFormat: 'yy-mm-dd' });
+  });
 });

@@ -17,7 +17,7 @@ class TripsController < ApplicationController
     @trip = user.trips.new(trip_params)
     if @trip.save
       flash[:success] = 'Trip successfully added!'
-      redirect_to user
+      redirect_to user_trip_path(user, @trip)
     else
       render 'new'
     end
@@ -50,7 +50,7 @@ class TripsController < ApplicationController
   private
 
   def trip_params
-    params.require(:trip).permit(:name, locations_attributes: [:id, :address, :order, :created_at, :updated_at])
+    params.require(:trip).permit(:name, :start_date, :end_date, locations_attributes: [:id, :address, :order, :created_at, :updated_at])
   end
 
   def user

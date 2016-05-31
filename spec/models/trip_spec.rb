@@ -17,6 +17,8 @@ RSpec.describe Trip, type: :model do
 
   describe 'fields' do
     it { is_expected.to have_fields(:name) }
+    it { is_expected.to have_fields(:start_date) }
+    it { is_expected.to have_fields(:end_date) }
     it { is_expected.to have_fields(:likes) }
     it { is_expected.to have_fields(:locations_list) }
     it { is_expected.to be_timestamped_document }
@@ -34,6 +36,20 @@ RSpec.describe Trip, type: :model do
 
   describe 'scopes' do
     xdescribe '#most_recent' do
+    end
+  end
+
+  describe '#dates' do
+    context 'no start or end date' do
+      it { expect(subject.dates).to eq('') }
+    end
+    context 'only start date is present' do
+      let_override(:trip) { |t| t.start_date = '2016-01-01' }
+      it { expect(subject.dates).to eq('2016-01-01') }
+    end
+    context 'both start and end dates are present' do
+      let_override(:trip) { |t| t.assign_attributes(start_date: '2016-02-02', end_date: '2016-03-03') }
+      it { expect(subject.dates).to eq('2016-02-02 to 2016-03-03') }
     end
   end
 
