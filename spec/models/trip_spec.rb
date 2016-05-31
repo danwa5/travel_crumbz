@@ -45,11 +45,11 @@ RSpec.describe Trip, type: :model do
     end
     context 'only start date is present' do
       let_override(:trip) { |t| t.start_date = '2016-01-01' }
-      it { expect(subject.dates).to eq('2016-01-01') }
+      it { expect(subject.dates).to eq('1.1.2016') }
     end
     context 'both start and end dates are present' do
       let_override(:trip) { |t| t.assign_attributes(start_date: '2016-02-02', end_date: '2016-03-03') }
-      it { expect(subject.dates).to eq('2016-02-02 to 2016-03-03') }
+      it { expect(subject.dates).to eq('2.2.2016 - 3.3.2016') }
     end
   end
 

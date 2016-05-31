@@ -25,10 +25,14 @@ class Trip
 
   def dates
     if start_date.present? && end_date.present?
-      "#{start_date} to #{end_date}"
+      "#{format_date(start_date)} - #{format_date(end_date)}"
     else
-      start_date.to_s
+      format_date(start_date)
     end
+  end
+
+  def format_date(date)
+    date.present? ? date.strftime('%-m.%-d.%Y') : ''
   end
 
   def users_list

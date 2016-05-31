@@ -15,6 +15,7 @@
           <th><center>Photos</center></th>
           <th><center>Created</center></th>
           <th><center>Updated</center></th>
+          <th><center>Edit</center></th>
         </tr>
       </thead>
     <% if @trips.any? %>
@@ -27,6 +28,11 @@
           <td><center><%= trip.photos.count %></center></td>
           <td><center><%= trip.created_at %></center></td>
           <td><center><%= trip.updated_at %></center></td>
+          <td><center>
+            <%= link_to edit_user_trip_path(@current_user, trip) do %>
+              <i class="fa fa-edit"></i>
+            <% end %></center>
+          </td>
         </tr>
       <% end %>
       </tbody>
