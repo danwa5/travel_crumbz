@@ -111,7 +111,7 @@
 
 <script type="text/javascript">
 var handler = Gmaps.build('Google');
-var provider_options = { scrollwheel: false };
+var provider_options = { mapTypeId: google.maps.MapTypeId.TERRAIN, scrollwheel: false };
   handler.buildMap({ provider: provider_options, internal: {id: 'map'}}, function() {
   var json_array = <%=raw @location_hash.to_json %>;
   var markers = handler.addMarkers(json_array);

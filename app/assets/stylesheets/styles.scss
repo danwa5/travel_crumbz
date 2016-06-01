@@ -144,7 +144,7 @@ img {
   top: 0;
   left: 0;
   background-color: #073028;
-  opacity: .4;
+  opacity: .3;
   z-index: -1;
 }
 
@@ -737,6 +737,7 @@ img {
   }
 
   #trip_end_date {
+    margin-top: 10px;
     margin-left: 0px;
   }
 }
